@@ -18,7 +18,7 @@ const Header = ({ cartItems, onCartClick }) => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-serif font-bold text-soft-white">
-                SCOCH
+                SOCH
               </h1>
             </div>
 
