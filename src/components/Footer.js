@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-serif font-bold mb-4">ELEGANCE</h3>
+            <h3 className="text-2xl font-serif font-bold mb-4">SOCH</h3>
             <p className="text-soft-white/80 mb-6 max-w-md">
               Discover timeless elegance and contemporary fashion. Our curated collection 
               brings you the finest quality clothing, perfumes, and accessories.

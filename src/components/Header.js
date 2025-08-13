@@ -18,7 +18,7 @@ const Header = ({ cartItems, onCartClick }) => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-serif font-bold text-soft-white">
-                ELEGANCE
+                SCOCH
               </h1>
             </div>
 
@@ -46,7 +46,7 @@ const Header = ({ cartItems, onCartClick }) => {
 
             {/* Cart Icon and Mobile Menu Button */}
             <div className="flex items-center space-x-4">
-              <button 
+              <button
                 onClick={onCartClick}
                 className="relative p-2 text-soft-white/90 hover:text-soft-white transition-colors duration-200"
                 title="View Cart"
@@ -72,11 +72,11 @@ const Header = ({ cartItems, onCartClick }) => {
       {/* Mobile Side Navigation */}
       <div className={`fixed inset-0 z-50 md:hidden ${isSideNavOpen ? 'block' : 'hidden'}`}>
         {/* Backdrop */}
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 transition-opacity duration-300"
           onClick={toggleSideNav}
         ></div>
-        
+
         {/* Side Navigation Panel */}
         <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300 ${isSideNavOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -88,7 +88,7 @@ const Header = ({ cartItems, onCartClick }) => {
               <X size={24} />
             </button>
           </div>
-          
+
           <nav className="p-6 space-y-4">
             <a
               href="#clothes"
@@ -119,7 +119,7 @@ const Header = ({ cartItems, onCartClick }) => {
               Sale
             </a>
           </nav>
-          
+
           <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200">
             <div className="flex items-center space-x-4 mb-4">
               <button className="p-2 text-text-dark hover:text-primary transition-colors duration-200">
