@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #1a1a1a;
+    background-color: #fafafa;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-soft-white px-6 py-3 font-medium hover:bg-primary-light transition-colors duration-200 rounded-lg;
+  }
+  
+  .btn-secondary {
+    @apply border border-primary text-primary px-6 py-3 font-medium hover:bg-primary hover:text-soft-white transition-colors duration-200 rounded-lg;
+  }
+  
+  .product-card {
+    @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-serif font-semibold text-primary mb-8 text-center;
+  }
+}
