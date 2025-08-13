@@ -39,7 +39,7 @@ const ProductDetail = ({ addToCart }) => {
     };
     
     addToCart(cartItem);
-    navigate('/cart');
+    // Cart will open automatically when item is added
   };
 
   const handleQuantityChange = (newQuantity) => {

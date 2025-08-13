@@ -49,6 +49,7 @@ const Header = ({ cartItems, onCartClick }) => {
               <button 
                 onClick={onCartClick}
                 className="relative p-2 text-soft-white/90 hover:text-soft-white transition-colors duration-200"
+                title="View Cart"
               >
                 <ShoppingCart size={24} />
                 {cartItemCount > 0 && (

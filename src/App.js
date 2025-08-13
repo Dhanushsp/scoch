@@ -8,12 +8,12 @@ import Reviews from './components/Reviews';
 import ReturnPolicy from './components/ReturnPolicy';
 import Footer from './components/Footer';
 import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart';
+import CartPanel from './components/CartPanel';
 import Checkout from './components/Checkout';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState('home');
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (newItem) => {
     setCartItems(prevItems => {
@@ -29,6 +29,8 @@ function App() {
         return [...prevItems, newItem];
       }
     });
+    // Automatically open cart when item is added
+    setIsCartOpen(true);
   };
 
   const updateCartItemQuantity = (itemId, size, newQuantity) => {
@@ -46,7 +48,11 @@ function App() {
   };
 
   const handleCartClick = () => {
-    setCurrentPage('cart');
+    setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
   };
 
   const HomePage = () => (
@@ -74,16 +80,6 @@ function App() {
               element={<ProductDetail addToCart={addToCart} />} 
             />
             <Route 
-              path="/cart" 
-              element={
-                <Cart 
-                  cartItems={cartItems}
-                  updateCartItemQuantity={updateCartItemQuantity}
-                  removeFromCart={removeFromCart}
-                />
-              } 
-            />
-            <Route 
               path="/checkout" 
               element={
                 <Checkout 
@@ -94,6 +90,16 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
+        
+        {/* Cart Panel */}
+        <CartPanel
+          isOpen={isCartOpen}
+          onClose={closeCart}
+          cartItems={cartItems}
+          updateCartItemQuantity={updateCartItemQuantity}
+          removeFromCart={removeFromCart}
+        />
+        
         <Footer />
       </div>
     </Router>
