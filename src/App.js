@@ -1,108 +1,72 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import FeaturedProducts from './components/FeaturedProducts';
 import BestSelling from './components/BestSelling';
 import Reviews from './components/Reviews';
-import ReturnPolicy from './components/ReturnPolicy';
+// import ReturnPolicy from './components/ReturnPolicy';
 import Footer from './components/Footer';
 import ProductDetail from './components/ProductDetail';
 import CartPanel from './components/CartPanel';
 import Checkout from './components/Checkout';
+import AboutUs from './components/AboutUs';
+import { CartProvider } from './contexts/CartContext';
+
+// Component to handle scroll to top on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const addToCart = (newItem) => {
-    setCartItems(prevItems => {
-      const existingItemIndex = prevItems.findIndex(
-        item => item.id === newItem.id && item.size === newItem.size
-      );
-
-      if (existingItemIndex > -1) {
-        const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += newItem.quantity;
-        return updatedItems;
-      } else {
-        return [...prevItems, newItem];
-      }
-    });
-    // Automatically open cart when item is added
-    setIsCartOpen(true);
-  };
-
-  const updateCartItemQuantity = (itemId, size, newQuantity) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === itemId && item.size === size ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeFromCart = (itemId, size) => {
-    setCartItems(prevItems =>
-      prevItems.filter(item => !(item.id === itemId && item.size === size))
-    );
-  };
-
-  const handleCartClick = () => {
-    setIsCartOpen(true);
-  };
-
-  const closeCart = () => {
-    setIsCartOpen(false);
-  };
-
   const HomePage = () => (
     <>
       <Banner />
       <FeaturedProducts />
       <BestSelling />
       <Reviews />
-      <ReturnPolicy />
+      
     </>
   );
 
   return (
-    <Router>
-      <div className="min-h-screen bg-soft-white">
-        <Header 
-          cartItems={cartItems} 
-          onCartClick={handleCartClick}
-        />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route 
-              path="/product/:id" 
-              element={<ProductDetail addToCart={addToCart} />} 
-            />
-            <Route 
-              path="/checkout" 
-              element={
-                <Checkout 
-                  cartItems={cartItems}
-                />
-              } 
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        
-        {/* Cart Panel */}
-        <CartPanel
-          isOpen={isCartOpen}
-          onClose={closeCart}
-          cartItems={cartItems}
-          updateCartItemQuantity={updateCartItemQuantity}
-          removeFromCart={removeFromCart}
-        />
-        
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="min-h-screen bg-soft-white">
+          <ScrollToTop />
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route 
+                path="/product/:id" 
+                element={<ProductDetail />} 
+              />
+              <Route 
+                path="/checkout" 
+                element={<Checkout />} 
+              />
+              <Route 
+                path="/about" 
+                element={<AboutUs />} 
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+          
+          {/* Cart Panel */}
+          <CartPanel />
+          
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

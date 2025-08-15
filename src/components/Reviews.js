@@ -1,82 +1,217 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 const Reviews = () => {
+  const [currentReview, setCurrentReview] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const carouselRef = useRef(null);
+
   const reviews = [
     {
       id: 1,
       name: "Sarah Johnson",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
       review: "Absolutely love the quality of their clothes! The fabric feels premium and the fit is perfect.",
-      rating: 5
+      reviewImage: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
     },
     {
       id: 2,
       name: "Michael Chen",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
       review: "Best perfume collection I've ever tried. Long-lasting fragrance and elegant packaging.",
-      rating: 5
+      reviewImage: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
     },
     {
       id: 3,
       name: "Emma Davis",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
       review: "Exceptional customer service and fast shipping. Will definitely shop here again!",
-      rating: 5
+      reviewImage: "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
     },
     {
       id: 4,
       name: "David Wilson",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
       review: "The attention to detail in their products is remarkable. Truly premium quality.",
-      rating: 5
+      reviewImage: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
     },
     {
       id: 5,
       name: "Lisa Rodriguez",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
       review: "Found my perfect summer dress here. The design is timeless and elegant.",
-      rating: 5
+      reviewImage: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const nextReview = () => {
+    setCurrentReview((prev) => (prev + 1) % reviews.length);
+  };
+
+  const prevReview = () => {
+    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
+  const goToReview = (index) => {
+    setCurrentReview(index);
+  };
+
   return (
-    <section className="py-16 bg-white">
+    <section ref={sectionRef} className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="section-title">Customer Reviews</h2>
-        
-        <div className="relative overflow-hidden">
-          <div className="flex animate-scroll">
-            {/* Duplicate reviews for seamless scrolling */}
-            {[...reviews, ...reviews].map((review, index) => (
-                             <div
-                 key={`${review.id}-${index}`}
-                 className="flex-shrink-0 w-80 md:w-96 mx-4 bg-soft-white rounded-xl p-6 shadow-md border border-gray-100"
-               >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-soft-white font-semibold text-lg mr-4">
-                    {review.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-text-dark">{review.name}</h4>
-                    <div className="flex items-center">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-4 h-4 text-yellow-400 fill-current"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-text-light leading-relaxed">
-                  "{review.review}"
-                </p>
-              </div>
-            ))}
-          </div>
+        {/* Section Header */}
+        <div className={`text-center mb-16 md:mb-20 transition-all duration-1000 ease-out transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
+            Customer Reviews
+          </h2>
+          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
+            Discover what our valued customers have to say about their SOCH experience
+          </p>
         </div>
         
-        <div className="text-center mt-8">
-          <p className="text-text-light text-sm">
-            Scroll to see more customer experiences
+        {/* Carousel Container */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevReview}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:text-black hover:bg-white hover:border-gray-300 transition-all duration-200 shadow-lg hover:shadow-xl"
+            aria-label="Previous review"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={nextReview}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:text-black hover:bg-white hover:border-gray-300 transition-all duration-200 shadow-lg hover:shadow-xl"
+            aria-label="Next review"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Carousel Content */}
+          <div 
+            ref={carouselRef}
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-2xl"
+          >
+            <div className="p-8 md:p-12">
+              {/* Review Content */}
+              <div className={`transition-all duration-700 ease-out transform ${
+                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}>
+                {/* Customer Image and Info */}
+                <div className="flex flex-col items-center text-center mb-8 md:mb-12">
+                  <div className="relative mb-6">
+                    <img
+                      src={reviews[currentReview].image}
+                      alt={reviews[currentReview].name}
+                      className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg"
+                    />
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white fill-current" viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-serif font-medium text-black mb-3">
+                    {reviews[currentReview].name}
+                  </h3>
+                  
+                  {/* Star Rating */}
+                  <div className="flex items-center space-x-1 mb-4">
+                    {[...Array(reviews[currentReview].rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 fill-current"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Review Text */}
+                <div className="text-center mb-8 md:mb-12">
+                  <blockquote className="text-lg md:text-xl text-gray-600 leading-relaxed italic">
+                    "{reviews[currentReview].review}"
+                  </blockquote>
+                </div>
+
+                {/* Review Image Section */}
+                <div className="text-center">
+                  <div className="inline-block">
+                    <div className="relative group">
+                      <img
+                        src={reviews[currentReview].reviewImage}
+                        alt={`${reviews[currentReview].name}'s review`}
+                        className="w-auto h-64 max-w-md md:max-w-lg lg:max-w-xl h-auto rounded-2xl shadow-lg border border-gray-100 object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-3 font-medium">
+                      {reviews[currentReview].name}'s Experience
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex justify-center mt-8 md:mt-12 space-x-3">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToReview(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentReview
+                    ? 'bg-black scale-125'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to review ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Review Counter */}
+          <div className="text-center mt-6">
+            <span className="text-sm text-gray-500 font-medium">
+              {currentReview + 1} of {reviews.length}
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom Text */}
+        <div className={`text-center mt-16 md:mt-20 transition-all duration-1000 ease-out delay-500 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <p className="text-gray-500 text-base md:text-lg font-medium">
+            Join thousands of satisfied customers
           </p>
         </div>
       </div>

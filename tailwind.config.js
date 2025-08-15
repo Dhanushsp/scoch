@@ -12,11 +12,14 @@ module.exports = {
         'primary-dark': '#2a2f15',
         'soft-white': '#fafafa',
         'text-dark': '#1a1a1a',
-        'text-light': '#666666'
+        'text-light': '#666666',
+        'accent-gold': '#D4AF37',
+        'accent-bronze': '#CD7F32',
+        'accent-silver': '#C0C0C0'
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'serif': ['Playfair Display', 'serif']
+        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+        'serif': ['Ed Garamond', 'Garamond', 'serif']
       },
       animation: {
         'scroll': 'scroll 20s linear infinite',

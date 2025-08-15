@@ -1,26 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     color: #1a1a1a;
     background-color: #fafafa;
+    line-height: 1.6;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', 'Ed Garamond', Garamond, serif;
+    line-height: 1.2;
+  }
+
+  p {
+    font-family: 'Poppins', system-ui, sans-serif;
+    line-height: 1.7;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-soft-white px-6 py-3 font-medium hover:bg-primary-light transition-colors duration-200 rounded-lg;
+    @apply bg-primary text-soft-white px-6 py-3 font-medium hover:bg-primary-light transition-colors duration-200 rounded-lg font-sans;
   }
   
   .btn-secondary {
-    @apply border border-primary text-primary px-6 py-3 font-medium hover:bg-primary hover:text-soft-white transition-colors duration-200 rounded-lg;
+    @apply border border-primary text-primary px-6 py-3 font-medium hover:bg-primary hover:text-soft-white transition-colors duration-200 rounded-lg font-sans;
   }
   
   .product-card {
@@ -28,6 +38,60 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-serif font-semibold text-primary mb-8 text-center;
+    @apply text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-primary mb-8 md:mb-12 text-center;
+  }
+
+  .heading-primary {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-primary;
+  }
+
+  .heading-secondary {
+    @apply font-serif text-2xl md:text-3xl lg:text-4xl font-medium text-text-dark;
+  }
+
+  .body-text {
+    @apply font-sans text-base md:text-lg text-text-light leading-relaxed;
+  }
+
+  .body-text-large {
+    @apply font-sans text-lg md:text-xl text-text-dark leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .animate-scroll-seamless {
+    animation: scroll-seamless 60s linear infinite;
+    scroll-behavior: smooth;
+  }
+
+  .animate-scroll-seamless.paused {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-seamless {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Custom scrollbar for better UX */
+  .animate-scroll-seamless::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .animate-scroll-seamless::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .animate-scroll-seamless::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  .animate-scroll-seamless::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
   }
 }

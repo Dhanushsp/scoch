@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Elegant Summer Dress",
+    "brand": "SOCH",
+    "category": "Clothes",
+    "price": 89.99,
+    "originalPrice": 129.99,
+    "discount": 31,
+    "images": [
+      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+    ],
+    "description": "A timeless summer dress crafted from premium cotton blend fabric. Features an elegant A-line silhouette with adjustable straps and a flattering waistline. Perfect for both casual outings and special occasions. The breathable material ensures comfort throughout the day while maintaining its shape and elegance.",
+    "features": [
+      "Premium cotton blend fabric",
+      "Adjustable straps",
+      "A-line silhouette",
+      "Flattering waistline",
+      "Breathable material",
+      "Machine washable"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "colors": ["White", "Navy", "Rose", "Mint"],
+    "inStock": true,
+    "stockQuantity": 45,
+    "rating": 4.8,
+    "reviewCount": 127,
+    "shipping": "Free shipping on orders over $50",
+    "returnPolicy": "30-day return policy",
+    "tags": ["Summer", "Dress", "Elegant", "Casual", "Premium"]
+  },
+  {
+    "id": 2,
+    "name": "Premium Perfume Collection",
+    "brand": "SOCH",
+    "category": "Perfumes",
+    "price": 149.99,
+    "originalPrice": 199.99,
+    "discount": 25,
+    "images": [
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+    ],
+    "description": "An exquisite collection of three signature fragrances, each crafted with the finest ingredients from around the world. This premium set includes our bestselling floral, woody, and fresh scents, presented in elegant glass bottles with gold accents. Perfect for gifting or treating yourself to luxury fragrances.",
+    "features": [
+      "Three signature fragrances",
+      "Premium ingredients",
+      "Elegant glass bottles",
+      "Gold accents",
+      "Long-lasting scent",
+      "Gift-ready packaging"
+    ],
+    "sizes": ["30ml", "50ml", "100ml"],
+    "colors": ["Clear", "Amber", "Rose Gold"],
+    "inStock": true,
+    "stockQuantity": 32,
+    "rating": 4.9,
+    "reviewCount": 89,
+    "shipping": "Free shipping on orders over $100",
+    "returnPolicy": "30-day return policy",
+    "tags": ["Perfume", "Luxury", "Gift", "Fragrance", "Premium"]
+  },
+  {
+    "id": 3,
+    "name": "Classic White Blouse",
+    "brand": "SOCH",
+    "category": "Clothes",
+    "price": 79.99,
+    "originalPrice": 99.99,
+    "discount": 20,
+    "images": [
+      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+    ],
+    "description": "A versatile white blouse that's perfect for any occasion. Made from high-quality silk blend fabric, this classic piece features a flattering fit, pearl buttons, and elegant details. Whether paired with jeans for a casual look or with a skirt for professional settings, this blouse will become a wardrobe staple.",
+    "features": [
+      "High-quality silk blend",
+      "Pearl buttons",
+      "Flattering fit",
+      "Versatile design",
+      "Easy to care for",
+      "Professional appearance"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["White", "Ivory", "Pearl"],
+    "inStock": true,
+    "stockQuantity": 67,
+    "rating": 4.7,
+    "reviewCount": 156,
+    "shipping": "Free shipping on orders over $50",
+    "returnPolicy": "30-day return policy",
+    "tags": ["Blouse", "Classic", "Professional", "Versatile", "Silk"]
+  },
+  {
+    "id": 4,
+    "name": "Luxury Fragrance Set",
+    "brand": "SOCH",
+    "category": "Perfumes",
+    "price": 129.99,
+    "originalPrice": 179.99,
+    "discount": 28,
+    "images": [
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    ],
+    "description": "A sophisticated collection of our most popular fragrances, presented in an elegant gift box. This set includes three distinct scents: a fresh citrus blend, a warm vanilla base, and a floral rose essence. Each fragrance is carefully crafted to complement the others, creating a harmonious olfactory experience.",
+    "features": [
+      "Three distinct fragrances",
+      "Elegant gift box",
+      "Complementary scents",
+      "Long-lasting formula",
+      "Luxury packaging",
+      "Perfect for gifting"
+    ],
+    "sizes": ["25ml", "40ml", "60ml"],
+    "colors": ["Multi", "Gift Box"],
+    "inStock": true,
+    "stockQuantity": 28,
+    "rating": 4.8,
+    "reviewCount": 94,
+    "shipping": "Free shipping on orders over $100",
+    "returnPolicy": "30-day return policy",
+    "tags": ["Fragrance", "Luxury", "Gift", "Collection", "Premium"]
+  },
+  {
+    "id": 5,
+    "name": "Timeless Evening Gown",
+    "brand": "SOCH",
+    "category": "Clothes",
+    "price": 299.99,
+    "originalPrice": 399.99,
+    "discount": 25,
+    "images": [
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+    ],
+    "description": "A stunning evening gown that embodies elegance and sophistication. Crafted from premium satin fabric with intricate beading and embroidery details. The flowing silhouette and adjustable fit ensure comfort while maintaining a glamorous appearance. Perfect for formal events, galas, and special occasions.",
+    "features": [
+      "Premium satin fabric",
+      "Intricate beading",
+      "Embroidery details",
+      "Flowing silhouette",
+      "Adjustable fit",
+      "Formal occasion ready"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["Black", "Navy", "Burgundy", "Emerald"],
+    "inStock": true,
+    "stockQuantity": 23,
+    "rating": 4.9,
+    "reviewCount": 67,
+    "shipping": "Free shipping on orders over $200",
+    "returnPolicy": "30-day return policy",
+    "tags": ["Evening Gown", "Formal", "Elegant", "Luxury", "Special Occasion"]
+  }
+]

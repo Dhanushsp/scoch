@@ -1,139 +1,42 @@
-import React, { useState } from 'react';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import logo from '../assets/logo.png';
+import { useCart } from '../contexts/CartContext';
 
-const Header = ({ cartItems, onCartClick }) => {
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-
-  const toggleSideNav = () => {
-    setIsSideNavOpen(!isSideNavOpen);
-  };
-
+const Header = () => {
+  const { cartItems, handleCartClick } = useCart();
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <>
-      <header className="bg-primary shadow-sm border-b border-primary-dark sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-serif font-bold text-soft-white">
-                SOCH
-              </h1>
-            </div>
+    <header className="bg-primary shadow-sm border-b border-primary-dark sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Spacer for left side */}
+          <div className="flex-1"></div>
 
-            {/* Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              <a
-                href="#clothes"
-                className="text-soft-white/90 hover:text-soft-white transition-colors duration-200 font-medium"
-              >
-                Clothes
-              </a>
-              <a
-                href="#perfumes"
-                className="text-soft-white/90 hover:text-soft-white transition-colors duration-200 font-medium"
-              >
-                Perfumes
-              </a>
-              <a
-                href="#accessories"
-                className="text-soft-white/90 hover:text-soft-white transition-colors duration-200 font-medium"
-              >
-                Accessories
-              </a>
-            </nav>
-
-            {/* Cart Icon and Mobile Menu Button */}
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={onCartClick}
-                className="relative p-2 text-soft-white/90 hover:text-soft-white transition-colors duration-200"
-                title="View Cart"
-              >
-                <ShoppingCart size={24} />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                    {cartItemCount}
-                  </span>
-                )}
-              </button>
-              <button
-                onClick={toggleSideNav}
-                className="md:hidden p-2 text-soft-white/90 hover:text-soft-white transition-colors duration-200"
-              >
-                <Menu size={24} />
-              </button>
-            </div>
+          {/* Centered Logo */}
+          <div className="flex-shrink-0">
+            <img src={logo} className='w-24 h-12 md:w-28 md:h-14' alt="Logo" />
           </div>
-        </div>
-      </header>
 
-      {/* Mobile Side Navigation */}
-      <div className={`fixed inset-0 z-50 md:hidden ${isSideNavOpen ? 'block' : 'hidden'}`}>
-        {/* Backdrop */}
-        <div
-          className="fixed inset-0 bg-black/50 transition-opacity duration-300"
-          onClick={toggleSideNav}
-        ></div>
-
-        {/* Side Navigation Panel */}
-        <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300 ${isSideNavOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-xl font-serif font-bold text-primary">Menu</h2>
+          {/* Cart Icon on the right */}
+          <div className="flex-1 flex justify-end">
             <button
-              onClick={toggleSideNav}
-              className="p-2 text-text-dark hover:text-primary transition-colors duration-200"
+              onClick={handleCartClick}
+              className="relative p-2 md:p-3 text-soft-white/90 hover:text-soft-white transition-colors duration-200"
+              title="View Cart"
             >
-              <X size={24} />
-            </button>
-          </div>
-
-          <nav className="p-6 space-y-4">
-            <a
-              href="#clothes"
-              className="block text-text-dark hover:text-primary transition-colors duration-200 font-medium text-lg py-3 border-b border-gray-100"
-              onClick={toggleSideNav}
-            >
-              Clothes
-            </a>
-            <a
-              href="#perfumes"
-              className="block text-text-dark hover:text-primary transition-colors duration-200 font-medium text-lg py-3 border-b border-gray-100"
-              onClick={toggleSideNav}
-            >
-              Perfumes
-            </a>
-            <a
-              href="#accessories"
-              className="block text-text-dark hover:text-primary transition-colors duration-200 font-medium text-lg py-3 border-b border-gray-100"
-              onClick={toggleSideNav}
-            >
-              Accessories
-            </a>
-            <a
-              href="#sale"
-              className="block text-text-dark hover:text-primary transition-colors duration-200 font-medium text-lg py-3 border-b border-gray-100"
-              onClick={toggleSideNav}
-            >
-              Sale
-            </a>
-          </nav>
-
-          <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200">
-            <div className="flex items-center space-x-4 mb-4">
-              <button className="p-2 text-text-dark hover:text-primary transition-colors duration-200">
-                <ShoppingCart size={24} />
-              </button>
-              <span className="text-text-dark font-medium">Cart (0)</span>
-            </div>
-            <button className="btn-primary w-full">
-              View Cart
+              <ShoppingCart size={24} className="md:w-6 md:h-6" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  {cartItemCount}
+                </span>
+              )}
             </button>
           </div>
         </div>
       </div>
-    </>
+    </header>
   );
 };
 

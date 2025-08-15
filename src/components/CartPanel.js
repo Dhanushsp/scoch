@@ -1,9 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Trash2, Minus, Plus, ShoppingBag } from 'lucide-react';
+import { useCart } from '../contexts/CartContext';
 
-const CartPanel = ({ isOpen, onClose, cartItems, updateCartItemQuantity, removeFromCart }) => {
+const CartPanel = () => {
   const navigate = useNavigate();
+  const { cartItems, isCartOpen, closeCart, updateCartItemQuantity, removeFromCart } = useCart();
+  
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
@@ -19,28 +22,28 @@ const CartPanel = ({ isOpen, onClose, cartItems, updateCartItemQuantity, removeF
   };
 
   const handleCheckout = () => {
-    // Navigate to checkout page
+    // Navigate to checkout page with cart items
     navigate('/checkout');
-    onClose(); // Close cart panel when navigating to checkout
+    closeCart(); // Close cart panel when navigating to checkout
   };
 
   return (
     <>
       {/* Backdrop */}
-      {isOpen && (
+      {isCartOpen && (
         <div 
           className="fixed inset-0 bg-black/50 transition-opacity duration-300 z-40"
-          onClick={onClose}
+          onClick={closeCart}
         ></div>
       )}
       
       {/* Cart Panel */}
-      <div className={`fixed right-0 top-0 h-full w-96 bg-white shadow-xl transform transition-transform duration-300 z-50 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed right-0 top-0 h-full w-96 bg-white shadow-xl transform transition-transform duration-300 z-50 ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h2 className="text-xl font-serif font-bold text-primary">Shopping Cart</h2>
           <button
-            onClick={onClose}
+            onClick={closeCart}
             className="p-2 text-text-dark hover:text-primary transition-colors duration-200"
           >
             <X size={24} />
@@ -73,9 +76,11 @@ const CartPanel = ({ isOpen, onClose, cartItems, updateCartItemQuantity, removeF
                       <h4 className="font-medium text-text-dark text-sm leading-tight mb-1">
                         {item.name}
                       </h4>
-                      {item.size && (
-                        <p className="text-xs text-text-light mb-2">Size: {item.size}</p>
-                      )}
+                      <div className="text-xs text-text-light mb-2">
+                        {item.size && <span>Size: {item.size}</span>}
+                        {item.size && item.color && <span> • </span>}
+                        {item.color && <span>Color: {item.color}</span>}
+                      </div>
                       <p className="text-primary font-semibold text-sm">
                         ${item.price}
                       </p>
@@ -118,7 +123,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, updateCartItemQuantity, removeF
 
           {/* Cart Summary and Actions */}
           {cartItems.length > 0 && (
-            <div className="border-t border-gray-200 p-6 space-y-4">
+            <div className="border-t border-gray-200 p-6 my-5 space-y-4">
               {/* Total */}
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-text-dark">Total:</span>
@@ -137,7 +142,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, updateCartItemQuantity, removeF
 
               {/* Continue Shopping */}
               <button
-                onClick={onClose}
+                onClick={closeCart}
                 className="w-full text-primary hover:text-primary-dark transition-colors duration-200 font-medium py-2"
               >
                 Continue Shopping
