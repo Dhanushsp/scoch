@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Banner from './components/Banner';
 import FeaturedProducts from './components/FeaturedProducts';
 import BestSelling from './components/BestSelling';
+import Perfumes from './components/Perfumes';
 import Reviews from './components/Reviews';
 // import ReturnPolicy from './components/ReturnPolicy';
 import Footer from './components/Footer';
@@ -30,6 +31,7 @@ function App() {
       <Banner />
       <FeaturedProducts />
       <BestSelling />
+      <Perfumes />
       <Reviews />
       
     </>

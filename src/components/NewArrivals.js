@@ -1,25 +1,55 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Star, Eye, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Star, ShoppingCart, Eye } from 'lucide-react';
 import productsData from '../data/products.json';
-import { getFirstProductImageById } from '../utils/imageUtils';
 
-const FeaturedProducts = () => {
+const NewArrivals = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Get featured products (all Volume II products)
-  const featuredProducts = productsData.filter(product => product.subCategory === "Volume II");
+  // Get products that are NOT in Volume I or Volume II (to avoid duplication)
+  const otherProducts = productsData.filter(product => 
+    product.category !== "Perfumes" && 
+    product.subCategory !== "Volume I" && 
+    product.subCategory !== "Volume II"
+  );
+
+  // Helper functions for dynamic pricing
+  const getDisplayPrice = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      return product.sizes[0].price; // Default to first size price
+    }
+    return product.price;
+  };
+
+  const getDisplayOriginalPrice = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      return product.sizes[0].originalPrice; // Default to first size original price
+    }
+    return product.originalPrice;
+  };
+
+  const getDisplayDiscount = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      const size = product.sizes[0];
+      if (size.originalPrice > size.price) {
+        return Math.round(((size.originalPrice - size.price) / size.originalPrice) * 100);
+      }
+    }
+    return product.discount || 0;
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.1 }
     );
@@ -31,55 +61,26 @@ const FeaturedProducts = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
-  };
-
-  const getDisplayPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest price
-      const lowestPrice = Math.min(...product.sizes.map(s => s.price));
-      return lowestPrice;
-    }
-    return product.price;
-  };
-
-  const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest original price
-      const lowestOriginalPrice = Math.min(...product.sizes.map(s => s.originalPrice));
-      return lowestOriginalPrice;
-    }
-    return product.originalPrice;
-  };
-
-  const getDisplayDiscount = (product) => {
-    const currentPrice = getDisplayPrice(product);
-    const currentOriginalPrice = getDisplayOriginalPrice(product);
-    if (currentOriginalPrice && currentPrice) {
-      return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
-    }
-    return product.discount;
-  };
+  if (otherProducts.length === 0) {
+    return null; // Don't render if no products
+  }
 
   return (
-    <section ref={sectionRef} className="pb-12 md:pb-16 bg-white">
+    <section ref={sectionRef} className="py-12 md:py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
-            Featured Products
+            Other Collections
           </h2>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
-            Discover our most popular and trending items
+            Discover additional styles and unique pieces
           </p>
         </div>
         
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {featuredProducts.map((product, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {otherProducts.map((product, index) => (
             <div
               key={product.id}
               className={`group transition-all duration-1000 ease-out transform ${
@@ -90,7 +91,7 @@ const FeaturedProducts = () => {
               {/* Product Image */}
               <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
                 <img
-                  src={getFirstProductImageById(product.id)}
+                  src={product.images[0]}
                   alt={product.name}
                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -126,6 +127,18 @@ const FeaturedProducts = () => {
                   {product.name}
                 </h3>
                 
+                {/* Category and Subcategory Badges */}
+                <div className="flex items-center justify-center space-x-2 mb-3">
+                  <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                    {product.category}
+                  </div>
+                  {product.subCategory && (
+                    <div className="inline-block bg-black text-white px-3 py-1 rounded-full text-sm font-medium">
+                      {product.subCategory}
+                    </div>
+                  )}
+                </div>
+                
                 {/* Price */}
                 <div className="flex items-center justify-center space-x-3 mb-4">
                   <span className="text-2xl font-bold text-black">
@@ -153,12 +166,13 @@ const FeaturedProducts = () => {
                   </span>
                 </div>
 
-                {/* Category Badge */}
-                <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-4">
-                  {product.category}
-                </div>
-
-
+                {/* Action Button */}
+                <button
+                  onClick={() => handleProductClick(product.id)}
+                  className="w-full py-3 px-6 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors"
+                >
+                  View Details
+                </button>
               </div>
             </div>
           ))}
@@ -168,4 +182,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default NewArrivals;

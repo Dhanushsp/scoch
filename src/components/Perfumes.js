@@ -1,25 +1,54 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Star, Eye, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Star, ShoppingCart, Eye } from 'lucide-react';
 import productsData from '../data/products.json';
 import { getFirstProductImageById } from '../utils/imageUtils';
 
-const FeaturedProducts = () => {
+const Perfumes = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Get featured products (all Volume II products)
-  const featuredProducts = productsData.filter(product => product.subCategory === "Volume II");
+  // Get all perfume products
+  const perfumeProducts = productsData.filter(product => 
+    product.category === "Perfumes"
+  );
+
+  // Helper functions for dynamic pricing
+  const getDisplayPrice = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      return product.sizes[0].price; // Default to first size price
+    }
+    return product.price;
+  };
+
+  const getDisplayOriginalPrice = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      return product.sizes[0].originalPrice; // Default to first size original price
+    }
+    return product.originalPrice;
+  };
+
+  const getDisplayDiscount = (product) => {
+    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+      const size = product.sizes[0];
+      if (size.originalPrice > size.price) {
+        return Math.round(((size.originalPrice - size.price) / size.originalPrice) * 100);
+      }
+    }
+    return product.discount || 0;
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.1 }
     );
@@ -31,55 +60,26 @@ const FeaturedProducts = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
-  };
-
-  const getDisplayPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest price
-      const lowestPrice = Math.min(...product.sizes.map(s => s.price));
-      return lowestPrice;
-    }
-    return product.price;
-  };
-
-  const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest original price
-      const lowestOriginalPrice = Math.min(...product.sizes.map(s => s.originalPrice));
-      return lowestOriginalPrice;
-    }
-    return product.originalPrice;
-  };
-
-  const getDisplayDiscount = (product) => {
-    const currentPrice = getDisplayPrice(product);
-    const currentOriginalPrice = getDisplayOriginalPrice(product);
-    if (currentOriginalPrice && currentPrice) {
-      return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
-    }
-    return product.discount;
-  };
+  if (perfumeProducts.length === 0) {
+    return null; // Don't render if no perfumes
+  }
 
   return (
-    <section ref={sectionRef} className="pb-12 md:pb-16 bg-white">
+    <section ref={sectionRef} className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
-            Featured Products
+            Perfumes
           </h2>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
-            Discover our most popular and trending items
+            Discover our exclusive collection of luxury fragrances
           </p>
         </div>
         
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {featuredProducts.map((product, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {perfumeProducts.map((product, index) => (
             <div
               key={product.id}
               className={`group transition-all duration-1000 ease-out transform ${
@@ -126,6 +126,11 @@ const FeaturedProducts = () => {
                   {product.name}
                 </h3>
                 
+                {/* Subcategory Badge */}
+                <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                  {product.subCategory}
+                </div>
+                
                 {/* Price */}
                 <div className="flex items-center justify-center space-x-3 mb-4">
                   <span className="text-2xl font-bold text-black">
@@ -153,11 +158,6 @@ const FeaturedProducts = () => {
                   </span>
                 </div>
 
-                {/* Category Badge */}
-                <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-4">
-                  {product.category}
-                </div>
-
 
               </div>
             </div>
@@ -168,4 +168,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default Perfumes;

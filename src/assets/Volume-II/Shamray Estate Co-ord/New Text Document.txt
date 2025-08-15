@@ -1,0 +1,45 @@
+Category: Volume II 
+Title: Shamray Estate Co-ord
+Price: Orig price 6,490 , 25% off : 4,890
+Fabric: Premium Indian Shamray
+Discription: 
+Crafted from premium Indian Shamray, this beige co-ord set channels effortless sophistication with a relaxed yet refined silhouette. Its lightweight weave drapes elegantly, making it perfect for warm days when style still matters. The understated hue and sharp tailoring give off an old-money charm that never tries too hard — it simply speaks for itself.
+
+Sizes: M , L , XL
+
+Size Chart: ( make a proper size chart & integrate it)
+Large
+Shirt
+Chest 24 
+Length 32 
+Sleeves 7
+Sleeves width 6
+Shoulder 18
+Short 
+Length 24 
+Waist 36
+Bottom width 7
+
+Medium
+Shirt
+Chest 21 
+Length 30
+Sleeves 6
+Sleeves width 5
+Shoulder 16
+Short 
+Length 22
+Waist 34
+Bottom width 6
+
+Extra large
+Shirt
+Length 34
+Chest 26
+Sleeves 8
+Sleeves width 7
+Shoulder 19
+Short 
+Length 26
+Waist 38
+Bottom width 8

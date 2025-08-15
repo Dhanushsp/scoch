@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ZoomIn, Truck, Package, Ruler, Star, ArrowLeft, Clock, CreditCard } from 'lucide-react';
 import productsData from '../data/products.json';
 import { useCart } from '../contexts/CartContext';
+import { getProductImagesById } from '../utils/imageUtils';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -18,6 +19,34 @@ const ProductDetail = () => {
 
   // Find product from universal data
   const product = productsData.find(p => p.id === parseInt(id));
+
+  // Get current price based on selected size (for perfumes)
+  const getCurrentPrice = () => {
+    if (product.category === 'Perfumes' && selectedSize && product.sizes) {
+      const sizeObj = product.sizes.find(s => s.size === selectedSize);
+      return sizeObj ? sizeObj.price : product.price;
+    }
+    return product.price;
+  };
+
+  // Get current original price based on selected size (for perfumes)
+  const getCurrentOriginalPrice = () => {
+    if (product.category === 'Perfumes' && selectedSize && product.sizes) {
+      const sizeObj = product.sizes.find(s => s.size === selectedSize);
+      return sizeObj ? sizeObj.originalPrice : product.originalPrice;
+    }
+    return product.originalPrice;
+  };
+
+  // Get current discount based on selected size (for perfumes)
+  const getCurrentDiscount = () => {
+    const currentPrice = getCurrentPrice();
+    const currentOriginalPrice = getCurrentOriginalPrice();
+    if (currentOriginalPrice && currentPrice) {
+      return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
+    }
+    return product.discount;
+  };
 
   // Size guide data
   const sizeGuideData = {
@@ -83,7 +112,7 @@ const ProductDetail = () => {
     const cartItem = {
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: getCurrentPrice(),
       image: product.images[0],
       size: selectedSize,
       color: selectedColor,
@@ -102,18 +131,18 @@ const ProductDetail = () => {
       alert('Please select both size and color');
       return;
     }
-    
+
     // Create cart item with all necessary information
     const cartItem = {
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: getCurrentPrice(),
       image: product.images[0],
       size: selectedSize,
       color: selectedColor,
       quantity: quantity
     };
-    
+
     // Add to cart first
     addToCart(cartItem);
     
@@ -125,9 +154,9 @@ const ProductDetail = () => {
     <div ref={sectionRef} className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <button
-            onClick={() => navigate('/')}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => navigate('/')}
             className="flex items-center text-black hover:text-gray-600 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -136,24 +165,26 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* Size Guide Button */}
-      <div className="absolute top-20 right-4 z-10">
-        <button
-          onClick={() => setIsSizeGuideOpen(true)}
-          className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-        >
-          <Ruler className="w-4 h-4" />
-          <span className="text-sm font-medium">Size Guide</span>
+      {/* Size Guide Button - Only show for clothing */}
+      {product.category === 'Clothes' && (
+        <div className="absolute top-20 right-4 z-10">
+          <button
+            onClick={() => setIsSizeGuideOpen(true)}
+            className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <Ruler className="w-4 h-4" />
+            <span className="text-sm font-medium">Size Guide</span>
         </button>
-      </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image Section */}
           <div className="space-y-6">
-            <div className="relative group">
+          <div className="relative group">
               <img
-                src={product.images[currentImageIndex]}
+                src={getProductImagesById(product.id)[currentImageIndex] || getProductImagesById(product.id)[0]}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover rounded-2xl shadow-lg"
               />
@@ -164,7 +195,7 @@ const ProductDetail = () => {
             
             {/* Thumbnail Images */}
             <div className="flex space-x-4">
-              {product.images.map((image, index) => (
+              {getProductImagesById(product.id).map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
@@ -177,96 +208,135 @@ const ProductDetail = () => {
                     alt={`${product.name} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
-                </button>
+              </button>
               ))}
             </div>
           </div>
 
-          {/* Product Details */}
+          {/* Product Information */}
           <div className="space-y-8">
-            {/* Brand and Name */}
-            <div className="text-center lg:text-left">
-              <p className="text-lg text-gray-600 font-medium mb-2">{product.brand}</p>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-medium text-black mb-4">
+            {/* Product Header */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h1 className="text-3xl md:text-4xl font-serif font-medium text-black">
                 {product.name}
               </h1>
-            </div>
-
-            {/* Price */}
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start space-x-4">
-                <span className="text-3xl md:text-4xl font-serif font-medium text-black">
-                  ${product.price}
-                </span>
-                {product.originalPrice > product.price && (
-                  <span className="text-xl text-gray-500 line-through">
-                    ${product.originalPrice}
-                  </span>
-                )}
-                {product.discount > 0 && (
-                  <span className="text-lg bg-red-500 text-white px-3 py-1 rounded-lg">
-                    -{product.discount}%
+                {/* Sold Out Badge */}
+                {!product.inStock && (
+                  <span className="px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-full">
+                    Sold Out
                   </span>
                 )}
               </div>
-            </div>
+              <p className="text-lg text-gray-600 mb-4">
+                {product.description}
+              </p>
+              
+              {/* Price Display */}
+              <div className="flex items-center space-x-4 mb-6">
+                <span className="text-3xl font-bold text-black">
+                  Rs. {getCurrentPrice().toLocaleString()}
+                </span>
+                {getCurrentOriginalPrice() && getCurrentOriginalPrice() > getCurrentPrice() && (
+                  <>
+                    <span className="text-xl text-gray-500 line-through">
+                      Rs. {getCurrentOriginalPrice().toLocaleString()}
+                    </span>
+                    <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {getCurrentDiscount()}% OFF
+                    </span>
+                  </>
+                )}
+              </div>
 
-            {/* Rating */}
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start space-x-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-4 h-4 md:w-5 md:h-5 ${
-                      i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                    }`}
-                  />
-                ))}
-                <span className="text-gray-600 ml-2">({product.reviewCount} reviews)</span>
+              {/* Rating */}
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-5 h-5 ${
+                        i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-gray-600 ml-2">
+                  {product.rating} ({product.reviewCount} reviews)
+                </span>
               </div>
             </div>
 
             {/* Size Selection */}
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start space-x-4 mb-4">
-                <h3 className="text-lg font-medium text-black">Size</h3>
-                <button
-                  onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-sm text-blue-600 hover:text-blue-800 underline"
-                >
-                  Size Guide
-                </button>
-              </div>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`px-4 py-2 rounded-lg border-2 transition-all ${
-                      selectedSize === size
-                        ? 'border-black bg-black text-white'
-                        : 'border-gray-300 text-black hover:border-black'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
+            <div>
+              <h3 className="text-lg font-medium text-black mb-4">
+                {product.category === 'Perfumes' ? 'Select Size' : 'Select Size'}
+              </h3>
+              <div className="grid grid-cols-3 gap-3">
+                {product.category === 'Perfumes' && product.sizes ? (
+                  // For perfumes, show size with pricing
+                  product.sizes.map((sizeObj) => (
+                    <button
+                      key={sizeObj.size}
+                      onClick={() => setSelectedSize(sizeObj.size)}
+                      disabled={!product.inStock}
+                      className={`p-4 border-2 rounded-lg text-center transition-all ${
+                        selectedSize === sizeObj.size
+                          ? 'border-black bg-black text-white'
+                          : product.inStock 
+                            ? 'border-gray-200 hover:border-gray-300' 
+                            : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
+                      }`}
+                    >
+                      <div className="font-medium">{sizeObj.size}</div>
+                      <div className="text-sm">
+                        Rs. {sizeObj.price.toLocaleString()}
+                      </div>
+                      {sizeObj.originalPrice > sizeObj.price && (
+                        <div className="text-xs line-through opacity-75">
+                          Rs. {sizeObj.originalPrice.toLocaleString()}
+                        </div>
+                      )}
+                    </button>
+                  ))
+                ) : (
+                  // For clothing, show standard sizes
+                  product.sizes.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      disabled={!product.inStock}
+                      className={`p-4 border-2 rounded-lg text-center transition-all ${
+                        selectedSize === size
+                          ? 'border-black bg-black text-white'
+                          : product.inStock 
+                            ? 'border-gray-200 hover:border-gray-300' 
+                            : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))
+                )}
               </div>
             </div>
 
             {/* Color Selection */}
-            <div className="text-center lg:text-left">
-              <h3 className="text-lg font-medium text-black mb-4">Color</h3>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+            <div>
+              <h3 className="text-lg font-medium text-black mb-4">Select Color</h3>
+              <div className="flex space-x-3">
                 {product.colors.map((color) => (
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                    disabled={!product.inStock}
+                    className={`px-4 py-2 border-2 rounded-lg transition-all ${
                       selectedColor === color
                         ? 'border-black bg-black text-white'
-                        : 'border-gray-300 text-black hover:border-black'
-                    }`}
+                        : product.inStock 
+                          ? 'border-gray-200 hover:border-gray-300' 
+                          : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
+                      }`}
                   >
                     {color}
                   </button>
@@ -275,19 +345,29 @@ const ProductDetail = () => {
             </div>
 
             {/* Quantity */}
-            <div className="text-center lg:text-left">
+            <div>
               <h3 className="text-lg font-medium text-black mb-4">Quantity</h3>
-              <div className="flex items-center justify-center lg:justify-start space-x-4">
+              <div className="flex items-center space-x-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-black transition-colors"
+                  disabled={!product.inStock}
+                  className={`w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center transition-all ${
+                    product.inStock 
+                      ? 'hover:bg-gray-50 cursor-pointer' 
+                      : 'bg-gray-100 cursor-not-allowed opacity-50'
+                  }`}
                 >
                   -
                 </button>
-                <span className="text-xl font-medium text-black w-16 text-center">{quantity}</span>
+                <span className="text-lg font-medium w-16 text-center">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-black transition-colors"
+                  disabled={!product.inStock}
+                  className={`w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center transition-all ${
+                    product.inStock 
+                      ? 'hover:bg-gray-50 cursor-pointer' 
+                      : 'bg-gray-100 cursor-not-allowed opacity-50'
+                  }`}
                 >
                   +
                 </button>
@@ -296,46 +376,79 @@ const ProductDetail = () => {
 
             {/* Action Buttons */}
             <div className="space-y-4">
-              <button
-                onClick={handleAddToCart}
-                className="w-full py-4 px-6 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors"
-              >
-                Add to Cart
-              </button>
-              <button
-                onClick={handleBuyNow}
-                className="w-full py-4 px-6 bg-white border-2 border-black text-black font-medium rounded-xl hover:bg-gray-50 transition-colors"
-              >
-                Buy Now
-              </button>
+              {product.inStock ? (
+                <>
+            <button
+              onClick={handleAddToCart}
+                    className="w-full py-4 px-6 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={handleBuyNow}
+                    className="w-full py-4 px-6 border-2 border-black text-black font-medium rounded-xl hover:bg-black hover:text-white transition-colors"
+                  >
+                    Buy Now
+            </button>
+                </>
+              ) : (
+                <div className="w-full py-4 px-6 bg-red-500 text-white font-medium rounded-xl text-center">
+                  Sold Out
+                </div>
+              )}
             </div>
 
-            {/* Description */}
-            <div className="text-center lg:text-left">
-              <h3 className="text-lg font-medium text-black mb-4">Description</h3>
-              <p className="text-gray-600 leading-relaxed">{product.description}</p>
-            </div>
+            {/* Product Features */}
+            {product.features && (
+              <div>
+                <h3 className="text-lg font-medium text-black mb-4">Features</h3>
+                <ul className="space-y-2">
+                  {product.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                      <span className="text-gray-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            {/* Features */}
-            <div className="text-center lg:text-left">
-              <h3 className="text-lg font-medium text-black mb-4">Features</h3>
-              <ul className="space-y-2">
-                {product.features.map((feature, index) => (
-                  <li key={index} className="text-gray-600 flex items-center justify-center lg:justify-start">
-                    <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Fragrance Notes for Perfumes */}
+            {product.category === 'Perfumes' && product.notes && (
+              <div>
+                <h3 className="text-lg font-medium text-black mb-4">Fragrance Notes</h3>
+                <div className="space-y-3">
+                  <div>
+                    <span className="font-medium text-gray-800">Top Notes: </span>
+                    <span className="text-gray-600">{product.notes.top.join(', ')}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-800">Heart Notes: </span>
+                    <span className="text-gray-600">{product.notes.heart.join(', ')}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-800">Base Notes: </span>
+                    <span className="text-gray-600">{product.notes.base.join(', ')}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Fabric Information for Clothing */}
+            {product.category === 'Clothes' && product.fabric && (
+              <div>
+                <h3 className="text-lg font-medium text-black mb-4">Fabric & Care</h3>
+                <p className="text-gray-600">{product.fabric}</p>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Services Section */}
-        <div className="bg-gray-50 py-16 md:py-20">
+        <div className="bg-gray-50 py-16 md:py-20 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-medium text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-serif font-medium text-black mb-6">
                 Our Services
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -384,8 +497,8 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* Size Guide Modal */}
-      {isSizeGuideOpen && (
+      {/* Size Guide Modal - Only for clothing */}
+      {isSizeGuideOpen && product.category === 'Clothes' && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-100">

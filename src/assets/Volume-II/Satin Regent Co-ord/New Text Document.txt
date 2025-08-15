@@ -1,0 +1,47 @@
+
+Category: Vol II
+Title: Satin Regent Co-ord
+Price: Og 6,490 , 25% off: 4,890
+Fabric: Satin Cotton
+Discription:
+Made from luxurious satin cotton, this deep green co-ord set blends subtle sheen with a structured fit, exuding quiet confidence. The rich jewel tone and smooth finish bring a vintage aristocratic air, perfect for those who appreciate timeless style over fleeting trends. Designed for comfort without sacrificing elegance, it’s a statement in understated luxury.
+
+Sizes: M , L , XL
+
+Size Chart: ( make a proper size chart & integrate it)
+
+Large
+Shirt
+Chest 24 
+Length 32 
+Sleeves 7
+Sleeves width 6
+Shoulder 18
+Short 
+Length 24 
+Waist 36
+Bottom width 7
+
+Medium
+Shirt
+Chest 21 
+Length 30
+Sleeves 6
+Sleeves width 5
+Shoulder 16
+Short 
+Length 22
+Waist 34
+Bottom width 6
+
+Extra large
+Shirt
+Length 34
+Chest 26
+Sleeves 8
+Sleeves width 7
+Shoulder 19
+Short 
+Length 26
+Waist 38
+Bottom width 8

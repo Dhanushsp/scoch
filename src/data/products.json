@@ -1,162 +1,380 @@
 [
   {
     "id": 1,
-    "name": "Elegant Summer Dress",
+    "name": "Satin Regent Co-ord",
     "brand": "SOCH",
     "category": "Clothes",
-    "price": 89.99,
-    "originalPrice": 129.99,
-    "discount": 31,
+    "subCategory": "Volume II",
+    "price": 4890,
+    "originalPrice": 6490,
+    "discount": 25,
     "images": [
-      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+      "src/assets/Volume-II/Satin Regent Co-ord/image13.jpg",
+      "src/assets/Volume-II/Satin Regent Co-ord/image21.jpg",
+      "src/assets/Volume-II/Satin Regent Co-ord/image22.jpg"
     ],
-    "description": "A timeless summer dress crafted from premium cotton blend fabric. Features an elegant A-line silhouette with adjustable straps and a flattering waistline. Perfect for both casual outings and special occasions. The breathable material ensures comfort throughout the day while maintaining its shape and elegance.",
+    "description": "Made from luxurious satin cotton, this deep green co-ord set blends subtle sheen with a structured fit, exuding quiet confidence.",
+    "longDescription": "Made from luxurious satin cotton, this deep green co-ord set blends subtle sheen with a structured fit, exuding quiet confidence. The rich jewel tone and smooth finish bring a vintage aristocratic air, perfect for those who appreciate timeless style over fleeting trends. Designed for comfort without sacrificing elegance, it's a statement in understated luxury.",
     "features": [
-      "Premium cotton blend fabric",
-      "Adjustable straps",
-      "A-line silhouette",
-      "Flattering waistline",
-      "Breathable material",
-      "Machine washable"
+      "Luxurious satin cotton fabric",
+      "Deep green jewel tone",
+      "Structured fit design",
+      "Vintage aristocratic aesthetic",
+      "Comfortable yet elegant",
+      "Timeless style appeal"
     ],
-    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
-    "colors": ["White", "Navy", "Rose", "Mint"],
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Deep Green"],
     "inStock": true,
-    "stockQuantity": 45,
-    "rating": 4.8,
-    "reviewCount": 127,
-    "shipping": "Free shipping on orders over $50",
-    "returnPolicy": "30-day return policy",
-    "tags": ["Summer", "Dress", "Elegant", "Casual", "Premium"]
+    "stockQuantity": 25,
+    "rating": 4.9,
+    "reviewCount": 67,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Co-ord", "Satin", "Luxury", "Volume II", "Structured", "Elegant"],
+    "fabric": "Satin Cotton",
+    "sizeChart": {
+      "M": {
+        "shirt": {
+          "chest": "21",
+          "length": "30",
+          "sleeves": "6",
+          "sleevesWidth": "5",
+          "shoulder": "16"
+        },
+        "shorts": {
+          "length": "22",
+          "waist": "34",
+          "bottomWidth": "6"
+        }
+      },
+      "L": {
+        "shirt": {
+          "chest": "24",
+          "length": "32",
+          "sleeves": "7",
+          "sleevesWidth": "6",
+          "shoulder": "18"
+        },
+        "shorts": {
+          "length": "24",
+          "waist": "36",
+          "bottomWidth": "7"
+        }
+      },
+      "XL": {
+        "shirt": {
+          "chest": "26",
+          "length": "34",
+          "sleeves": "8",
+          "sleevesWidth": "7",
+          "shoulder": "19"
+        },
+        "shorts": {
+          "length": "26",
+          "waist": "38",
+          "bottomWidth": "8"
+        }
+      }
+    }
   },
   {
     "id": 2,
-    "name": "Premium Perfume Collection",
+    "name": "Shamray Estate Co-ord",
     "brand": "SOCH",
-    "category": "Perfumes",
-    "price": 149.99,
-    "originalPrice": 199.99,
+    "category": "Clothes",
+    "subCategory": "Volume II",
+    "price": 4890,
+    "originalPrice": 6490,
     "discount": 25,
     "images": [
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+      "src/assets/Volume-II/Shamray Estate Co-ord/1.1.jpg",
+      "src/assets/Volume-II/Shamray Estate Co-ord/1.2.jpg",
+      "src/assets/Volume-II/Shamray Estate Co-ord/1.3.jpg"
     ],
-    "description": "An exquisite collection of three signature fragrances, each crafted with the finest ingredients from around the world. This premium set includes our bestselling floral, woody, and fresh scents, presented in elegant glass bottles with gold accents. Perfect for gifting or treating yourself to luxury fragrances.",
+    "description": "Crafted from premium Indian Shamray, this beige co-ord set channels effortless sophistication with a relaxed yet refined silhouette.",
+    "longDescription": "Crafted from premium Indian Shamray, this beige co-ord set channels effortless sophistication with a relaxed yet refined silhouette. Its lightweight weave drapes elegantly, making it perfect for warm days when style still matters. The understated hue and sharp tailoring give off an old-money charm that never tries too hard – it simply speaks for itself.",
     "features": [
-      "Three signature fragrances",
-      "Premium ingredients",
-      "Elegant glass bottles",
-      "Gold accents",
-      "Long-lasting scent",
-      "Gift-ready packaging"
+      "Premium Indian Shamray fabric",
+      "Beige understated hue",
+      "Lightweight weave",
+      "Relaxed yet refined silhouette",
+      "Sharp tailoring",
+      "Old-money charm aesthetic"
     ],
-    "sizes": ["30ml", "50ml", "100ml"],
-    "colors": ["Clear", "Amber", "Rose Gold"],
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Beige"],
     "inStock": true,
-    "stockQuantity": 32,
-    "rating": 4.9,
+    "stockQuantity": 30,
+    "rating": 4.8,
     "reviewCount": 89,
-    "shipping": "Free shipping on orders over $100",
-    "returnPolicy": "30-day return policy",
-    "tags": ["Perfume", "Luxury", "Gift", "Fragrance", "Premium"]
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Co-ord", "Shamray", "Premium", "Volume II", "Sophisticated", "Refined"],
+    "fabric": "Premium Indian Shamray",
+    "sizeChart": {
+      "M": {
+        "shirt": {
+          "chest": "21",
+          "length": "30",
+          "sleeves": "6",
+          "sleevesWidth": "5",
+          "shoulder": "16"
+        },
+        "shorts": {
+          "length": "22",
+          "waist": "34",
+          "bottomWidth": "6"
+        }
+      },
+      "L": {
+        "shirt": {
+          "chest": "24",
+          "length": "32",
+          "sleeves": "7",
+          "sleevesWidth": "6",
+          "shoulder": "18"
+        },
+        "shorts": {
+          "length": "24",
+          "waist": "36",
+          "bottomWidth": "7"
+        }
+      },
+      "XL": {
+        "shirt": {
+          "chest": "26",
+          "length": "34",
+          "sleeves": "8",
+          "sleevesWidth": "7",
+          "shoulder": "19"
+        },
+        "shorts": {
+          "length": "26",
+          "waist": "38",
+          "bottomWidth": "8"
+        }
+      }
+    }
   },
   {
     "id": 3,
-    "name": "Classic White Blouse",
+    "name": "The Heritage Rebel",
     "brand": "SOCH",
     "category": "Clothes",
-    "price": 79.99,
-    "originalPrice": 99.99,
+    "subCategory": "Volume I",
+    "price": 4000,
+    "originalPrice": 5000,
     "discount": 20,
     "images": [
-      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1564257631407-3deb5d241d45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+      "src/assets/Volume I/The heritage rebel/4.1.jpg",
+      "src/assets/Volume I/The heritage rebel/4.2.jpg",
+      "src/assets/Volume I/The heritage rebel/4.3.jpg"
     ],
-    "description": "A versatile white blouse that's perfect for any occasion. Made from high-quality silk blend fabric, this classic piece features a flattering fit, pearl buttons, and elegant details. Whether paired with jeans for a casual look or with a skirt for professional settings, this blouse will become a wardrobe staple.",
+    "description": "SOCH - The First Hood. A symbol of rebellion wrapped in comfort.",
+    "longDescription": "Our first-ever hoodie blends Mughal-inspired detailing with modern streetwear flair. Crafted from heavyweight cotton fleece, it features a structured silhouette, deep-set details, and the rebellious spirit that defines SOCH.",
     "features": [
-      "High-quality silk blend",
-      "Pearl buttons",
-      "Flattering fit",
-      "Versatile design",
-      "Easy to care for",
-      "Professional appearance"
+      "Mughal-inspired detailing",
+      "Modern streetwear flair",
+      "Heavyweight cotton fleece",
+      "Structured silhouette",
+      "Deep-set details",
+      "Rebellious spirit design"
     ],
-    "sizes": ["XS", "S", "M", "L", "XL"],
-    "colors": ["White", "Ivory", "Pearl"],
-    "inStock": true,
-    "stockQuantity": 67,
-    "rating": 4.7,
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "Navy", "Charcoal"],
+    "inStock": false,
+    "stockQuantity": 0,
+    "rating": 4.9,
     "reviewCount": 156,
-    "shipping": "Free shipping on orders over $50",
-    "returnPolicy": "30-day return policy",
-    "tags": ["Blouse", "Classic", "Professional", "Versatile", "Silk"]
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Hoodie", "Heritage", "Rebel", "Volume I", "Mughal", "Streetwear"],
+    "fabric": "Heavyweight cotton fleece"
   },
   {
     "id": 4,
-    "name": "Luxury Fragrance Set",
+    "name": "Afsanay",
     "brand": "SOCH",
-    "category": "Perfumes",
-    "price": 129.99,
-    "originalPrice": 179.99,
-    "discount": 28,
+    "category": "Clothes",
+    "subCategory": "Volume I",
+    "price": 3800,
+    "originalPrice": 5200,
+    "discount": 27,
     "images": [
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+      "src/assets/Volume I/Afsanay/2.1.jpg",
+      "src/assets/Volume I/Afsanay/2.2.jpg",
+      "src/assets/Volume I/Afsanay/2.3.jpg"
     ],
-    "description": "A sophisticated collection of our most popular fragrances, presented in an elegant gift box. This set includes three distinct scents: a fresh citrus blend, a warm vanilla base, and a floral rose essence. Each fragrance is carefully crafted to complement the others, creating a harmonious olfactory experience.",
+    "description": "Afsanay collection weaves stories through fabric, combining traditional storytelling elements with modern fashion design.",
+    "longDescription": "The Afsanay collection draws inspiration from the rich storytelling traditions of Pakistan, translating these narratives into beautiful, wearable art. These pieces feature unique patterns, traditional motifs, and contemporary cuts that make every garment a conversation starter.",
     "features": [
-      "Three distinct fragrances",
-      "Elegant gift box",
-      "Complementary scents",
-      "Long-lasting formula",
-      "Luxury packaging",
-      "Perfect for gifting"
+      "Story-inspired designs",
+      "Traditional Pakistani motifs",
+      "Contemporary cuts and silhouettes",
+      "Premium fabric quality",
+      "Unique pattern combinations",
+      "Cultural storytelling elements"
     ],
-    "sizes": ["25ml", "40ml", "60ml"],
-    "colors": ["Multi", "Gift Box"],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["Sage", "Terracotta", "Indigo", "Cream"],
     "inStock": true,
-    "stockQuantity": 28,
+    "stockQuantity": 42,
     "rating": 4.8,
-    "reviewCount": 94,
-    "shipping": "Free shipping on orders over $100",
-    "returnPolicy": "30-day return policy",
-    "tags": ["Fragrance", "Luxury", "Gift", "Collection", "Premium"]
+    "reviewCount": 67,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Storytelling", "Traditional", "Modern", "Cultural", "Unique", "Artistic"],
+    "fabric": "Premium cotton with traditional block prints"
   },
   {
     "id": 5,
-    "name": "Timeless Evening Gown",
+    "name": "Raah-e-Manzil",
     "brand": "SOCH",
     "category": "Clothes",
-    "price": 299.99,
-    "originalPrice": 399.99,
+    "subCategory": "Volume I",
+    "price": 4200,
+    "originalPrice": 5800,
+    "discount": 28,
+    "images": [
+      "src/assets/Volume I/Raah-e-manzil/2.1.jpg",
+      "src/assets/Volume I/Raah-e-manzil/2.2.jpg",
+      "src/assets/Volume I/Raah-e-manzil/2.3.jpg"
+    ],
+    "description": "Raah-e-Manzil represents the journey towards excellence in fashion, combining the best of traditional techniques with innovative design approaches.",
+    "longDescription": "This collection embodies the journey of Pakistani fashion evolution, showcasing how traditional techniques can be elevated through modern design thinking. Raah-e-Manzil pieces feature innovative fabric combinations, contemporary cuts, and traditional craftsmanship that results in truly unique garments.",
+    "features": [
+      "Journey-inspired designs",
+      "Innovative fabric combinations",
+      "Contemporary cuts",
+      "Traditional craftsmanship",
+      "Timeless appeal",
+      "Unique design elements"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "colors": ["Charcoal", "Rust", "Teal", "Ivory"],
+    "inStock": true,
+    "stockQuantity": 38,
+    "rating": 4.9,
+    "reviewCount": 73,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Journey", "Innovation", "Traditional", "Contemporary", "Timeless", "Unique"],
+    "fabric": "Premium cotton and silk blend with traditional embroidery"
+  },
+  {
+    "id": 6,
+    "name": "Éclat Royale - Impression of Creed Aventus",
+    "brand": "SOCH",
+    "category": "Perfumes",
+    "subCategory": "Men",
+    "price": 2500,
+    "originalPrice": 3500,
     "discount": 25,
     "images": [
-      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+      "src/assets/logo.png",
+      "src/assets/logo.png",
+      "src/assets/logo.png"
     ],
-    "description": "A stunning evening gown that embodies elegance and sophistication. Crafted from premium satin fabric with intricate beading and embroidery details. The flowing silhouette and adjustable fit ensure comfort while maintaining a glamorous appearance. Perfect for formal events, galas, and special occasions.",
+    "description": "Éclat Royale – The Essence of Power & Prestige. Step into a world of sophistication with Éclat Royale, a masterful impression of the legendary Creed Aventus.",
+    "longDescription": "Crafted for those who desire the commanding presence of the original without the extravagant price tag, Éclat Royale delivers luxury within reach. With its bold, fruity opening of pineapple, blackcurrant, and bergamot, it immediately captures attention. The heart reveals a refined blend of jasmine and patchouli, balanced with a whisper of dry birch, while the base settles into rich notes of oakmoss, ambergris, and vanilla – a scent profile that speaks of power, elegance, and timeless appeal.",
     "features": [
-      "Premium satin fabric",
-      "Intricate beading",
-      "Embroidery details",
-      "Flowing silhouette",
-      "Adjustable fit",
-      "Formal occasion ready"
+      "Luxury for less – enjoy the iconic Aventus-inspired scent at a fraction of the cost",
+      "Premium longevity & projection – designed to linger and turn heads",
+      "Versatile elegance – perfect for both day and night wear",
+      "Bold, fruity opening with pineapple, blackcurrant, and bergamot",
+      "Refined heart with jasmine, patchouli, and birch",
+      "Rich base with oakmoss, ambergris, and vanilla"
     ],
-    "sizes": ["XS", "S", "M", "L", "XL"],
-    "colors": ["Black", "Navy", "Burgundy", "Emerald"],
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": 2500,
+        "originalPrice": 3500,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "30ml",
+        "price": 1800,
+        "originalPrice": 2400,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "10ml",
+        "price": 850,
+        "originalPrice": 1150,
+        "image": "src/assets/logo.png"
+      }
+    ],
+    "colors": ["Clear"],
     "inStock": true,
-    "stockQuantity": 23,
+    "stockQuantity": 50,
     "rating": 4.9,
-    "reviewCount": 67,
-    "shipping": "Free shipping on orders over $200",
-    "returnPolicy": "30-day return policy",
-    "tags": ["Evening Gown", "Formal", "Elegant", "Luxury", "Special Occasion"]
-  }
+    "reviewCount": 156,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Perfume", "Men", "Luxury", "Creed Aventus", "Sophisticated", "Powerful"],
+    "notes": {
+      "top": ["Pineapple", "Bergamot", "Black Currant", "Apple"],
+      "heart": ["Moroccan Jasmine", "Birch", "Patchouli"],
+      "base": ["Musk", "Oakmoss", "Ambergris", "Vanilla"]
+    }
+  },
+  {
+    "id": 7,
+    "name": "Roselina - Impression of Delina",
+    "brand": "SOCH",
+    "category": "Perfumes",
+    "subCategory": "Women",
+    "price": 2800,
+    "originalPrice": 3800,
+    "discount": 26,
+    "images": [
+      "src/assets/logo.png",
+      "src/assets/logo.png",
+      "src/assets/logo.png"
+    ],
+    "description": "Roselina captures the essence of feminine elegance with its sophisticated blend of floral and fruity notes.",
+    "longDescription": "A perfect impression of the iconic Delina fragrance, offering luxury and sophistication at an accessible price point. Experience the perfect balance of fresh florals and warm undertones that create an unforgettable impression. Roselina is designed for the modern woman who appreciates both luxury and value, delivering the same sophisticated scent profile as the original Delina without the premium price tag.",
+    "features": [
+      "Sophisticated floral and fruity blend",
+      "Long-lasting fragrance",
+      "Perfect for day and evening wear",
+      "Luxury packaging",
+      "Accessible luxury pricing"
+    ],
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": 2800,
+        "originalPrice": 3800,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "30ml",
+        "price": 2000,
+        "originalPrice": 2700,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "10ml",
+        "price": 950,
+        "originalPrice": 1300,
+        "image": "src/assets/logo.png"
+      }
+    ],
+    "colors": ["Clear"],
+    "inStock": true,
+    "stockQuantity": 45,
+    "rating": 4.8,
+    "reviewCount": 134,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": ["Perfume", "Women", "Floral", "Delina", "Elegant", "Feminine"],
+    "notes": {
+      "top": ["Rose", "Lychee", "Bergamot"],
+      "heart": ["Peony", "Lily", "Carnation"],
+      "base": ["Musk", "Cedar", "Vanilla"]
+    }
+    }
 ]

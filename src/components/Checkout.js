@@ -138,7 +138,7 @@ const Checkout = () => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => navigate('/')}
             className="flex items-center text-black hover:text-gray-600 transition-colors"
@@ -147,120 +147,120 @@ const Checkout = () => {
             Back to Home
           </button>
         </div>
-      </div>
+        </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Checkout Form */}
           <div className="space-y-8">
-            <div>
+          <div>
               <h1 className="text-3xl md:text-4xl font-serif font-medium text-black mb-2">Checkout</h1>
               <p className="text-gray-600">Complete your purchase</p>
             </div>
-
+              
             {/* Contact Information */}
             <div>
               <h2 className="text-xl font-medium text-black mb-4">Contact Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="firstName"
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      name="firstName"
                   placeholder="First Name *"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
+                      value={formData.firstName}
+                      onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                  required
-                />
-                <input
-                  type="text"
-                  name="lastName"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
                   placeholder="Last Name *"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
+                      value={formData.lastName}
+                      onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                  required
-                />
-              </div>
+                      required
+                    />
+                  </div>
               <div className="mt-4">
-                <input
-                  type="email"
-                  name="email"
+                    <input
+                      type="email"
+                      name="email"
                   placeholder="Email Address *"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                      value={formData.email}
+                      onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                  required
-                />
-              </div>
+                      required
+                    />
+                  </div>
               <div className="mt-4">
-                <input
-                  type="tel"
-                  name="phone"
+                    <input
+                      type="tel"
+                      name="phone"
                   placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
+                      value={formData.phone}
+                      onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                />
-              </div>
-            </div>
+                    />
+                  </div>
+                </div>
 
             {/* Shipping Address */}
-            <div>
+                <div>
               <h2 className="text-xl font-medium text-black mb-4">Shipping Address</h2>
               <div className="space-y-4">
-                <input
-                  type="text"
-                  name="address"
+                  <input
+                    type="text"
+                    name="address"
                   placeholder="Street Address *"
-                  value={formData.address}
-                  onChange={handleInputChange}
+                    value={formData.address}
+                    onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                  required
-                />
+                    required
+                  />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <input
-                    type="text"
-                    name="city"
+                    <input
+                      type="text"
+                      name="city"
                     placeholder="City *"
-                    value={formData.city}
-                    onChange={handleInputChange}
+                      value={formData.city}
+                      onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="state"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="state"
                     placeholder="State *"
-                    value={formData.state}
-                    onChange={handleInputChange}
+                      value={formData.state}
+                      onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="zipCode"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="zipCode"
                     placeholder="ZIP Code *"
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
+                      value={formData.zipCode}
+                      onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                    required
-                  />
-                </div>
-                <select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <select
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
-                >
-                  <option value="United States">United States</option>
-                  <option value="Canada">Canada</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="Australia">Australia</option>
+                  >
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
                   <option value="Germany">Germany</option>
                   <option value="France">France</option>
                   <option value="Pakistan">Pakistan</option>
                   <option value="Other">Other</option>
-                </select>
+                  </select>
               </div>
             </div>
 
@@ -297,7 +297,7 @@ const Checkout = () => {
                   </div>
                 </label>
               </div>
-            </div>
+                </div>
 
             {/* Security Notice */}
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -310,7 +310,7 @@ const Checkout = () => {
 
           {/* Order Summary */}
           <div className="space-y-6">
-            <div>
+          <div>
               <h2 className="text-2xl font-medium text-black mb-6">Order Summary</h2>
             </div>
 
@@ -321,9 +321,9 @@ const Checkout = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
-                  <div className="flex-1">
+                      className="w-16 h-16 object-cover rounded-lg"
+                    />
+                    <div className="flex-1">
                     <h3 className="font-medium text-black">{product.name}</h3>
                     <p className="text-sm text-gray-600">
                       Size: {product.size} | Color: {product.color}
@@ -332,56 +332,56 @@ const Checkout = () => {
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-black">${(product.price * product.quantity).toFixed(2)}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
             {/* Price Breakdown */}
-            <div className="border-t border-gray-200 pt-4 space-y-3">
-              <div className="flex justify-between">
+              <div className="border-t border-gray-200 pt-4 space-y-3">
+                <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
                 <span className="text-black">${subtotal.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
+                </div>
+                <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
                 <span className="text-black">
                   {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
                 </span>
-              </div>
-              <div className="flex justify-between">
+                </div>
+                <div className="flex justify-between">
                 <span className="text-gray-600">Tax</span>
                 <span className="text-black">${tax.toFixed(2)}</span>
-              </div>
-              <div className="border-t border-gray-200 pt-3">
-                <div className="flex justify-between">
+                </div>
+                <div className="border-t border-gray-200 pt-3">
+                  <div className="flex justify-between">
                   <span className="text-lg font-medium text-black">Total</span>
                   <span className="text-lg font-medium text-black">${total.toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Shipping Info */}
+              {/* Shipping Info */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 text-gray-600 mb-2">
                 <Truck className="w-4 h-4" />
                 <span className="text-sm font-medium">Shipping Information</span>
-              </div>
+                </div>
               <p className="text-sm text-gray-600">
                 Free shipping on All orders. Standard delivery takes 3-5 business days.
-              </p>
-            </div>
+                </p>
+              </div>
 
             {/* Return Policy */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 text-gray-600 mb-2">
                 <Shield className="w-4 h-4" />
                 <span className="text-sm font-medium">Return Policy</span>
-              </div>
+                </div>
               <p className="text-sm text-gray-600">
                 7-days return policy. Easy returns and exchanges for unused items.
-              </p>
-            </div>
+                </p>
+              </div>
 
             {/* Place Order Button */}
             <button
