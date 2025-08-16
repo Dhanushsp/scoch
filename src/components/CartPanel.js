@@ -66,9 +66,13 @@ const CartPanel = () => {
                   <div key={`${item.id}-${item.size}`} className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
                     {/* Product Image */}
                     <img
-                      src={item.image}
+                      src={item.image || '/src/assets/logo.png'}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                      onError={(e) => {
+                        e.target.src = '/src/assets/logo.png';
+                        e.target.onerror = null; // Prevent infinite loop
+                      }}
                     />
                     
                     {/* Product Details */}

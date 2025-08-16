@@ -68,7 +68,7 @@ const Footer = () => {
                 <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                soch@gmail.com
+                muhibaamir2004@gmail.com
               </li>
               <li className="flex items-center text-soft-white/80 font-sans text-base md:text-lg">
                 <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,12 +84,15 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="border-t border-primary-light mt-8 md:mt-12 pt-8 md:pt-12 text-center">
           <p className="text-soft-white/60 text-sm md:text-base font-sans">
-            © 2024 ELEGANCE. All rights reserved. | 
+            © 2025 SOCH. All rights reserved. | 
             <a href="/privacy" className="text-soft-white/80 hover:text-soft-white ml-2 transition-colors duration-200">
               Privacy Policy
             </a> | 
             <a href="/terms" className="text-soft-white/80 hover:text-soft-white ml-2 transition-colors duration-200">
               Terms of Service
+            </a> |
+            <a className="text-soft-white/80 hover:text-soft-white ml-2 transition-colors duration-200">
+              Made Dhanush India
             </a>
           </p>
         </div>

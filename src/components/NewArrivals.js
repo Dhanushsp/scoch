@@ -139,17 +139,26 @@ const NewArrivals = () => {
                   )}
                 </div>
                 
-                {/* Price */}
-                <div className="flex items-center justify-center space-x-3 mb-4">
-                  <span className="text-2xl font-bold text-black">
-                    Rs. {getDisplayPrice(product).toLocaleString()}
-                  </span>
-                  {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                    <span className="text-lg text-gray-500 line-through">
-                      Rs. {getDisplayOriginalPrice(product).toLocaleString()}
-                    </span>
-                  )}
-                </div>
+                                 {/* Price */}
+                 <div className="flex items-center justify-center space-x-3 mb-4">
+                   <span className="text-2xl font-bold text-black">
+                     Rs. {getDisplayPrice(product).toLocaleString()}
+                   </span>
+                   {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
+                     <span className="text-lg text-gray-500 line-through">
+                       Rs. {getDisplayOriginalPrice(product).toLocaleString()}
+                     </span>
+                   )}
+                 </div>
+                 
+                 {/* Savings Amount */}
+                 {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
+                   <div className="text-center mb-4">
+                     <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                       Save Rs. {(getDisplayOriginalPrice(product) - getDisplayPrice(product)).toLocaleString()}
+                     </span>
+                   </div>
+                 )}
 
                 {/* Rating */}
                 <div className="flex items-center justify-center space-x-1 mb-4">

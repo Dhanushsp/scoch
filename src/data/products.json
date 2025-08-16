@@ -197,8 +197,8 @@
       "src/assets/Volume I/The heritage rebel/4.2.jpg",
       "src/assets/Volume I/The heritage rebel/4.3.jpg"
     ],
-    "description": "SOCH - The First Hood. A symbol of rebellion wrapped in comfort.",
-    "longDescription": "Our first-ever hoodie blends Mughal-inspired detailing with modern streetwear flair. Crafted from heavyweight cotton fleece, it features a structured silhouette, deep-set details, and the rebellious spirit that defines SOCH.",
+    "description": "SOCH - The First Hood\nA symbol of rebellion wrapped in comfort\nOur first-ever hoodie blends Mughal-inspired detailing with modern streetwear flair.\nCrafted from heavyweight cotton fleece it features a structured silhouette, deep-set hood, and a story in",
+    "longDescription": "SOCH - The First Hood\nA symbol of rebellion wrapped in comfort\nOur first-ever hoodie blends Mughal-inspired detailing with modern streetwear flair.\nCrafted from heavyweight cotton fleece it features a structured silhouette, deep-set hood, and a story in",
     "features": [
       "Mughal-inspired detailing",
       "Modern streetwear flair",
@@ -214,9 +214,7 @@
       "XL"
     ],
     "colors": [
-      "Black",
-      "Navy",
-      "Charcoal"
+      "Beige"
     ],
     "inStock": false,
     "stockQuantity": 0,
@@ -241,7 +239,7 @@
     "category": "Clothes",
     "subCategory": "Volume I",
     "price": 3800,
-    "originalPrice": 5200,
+    "originalPrice": 4200,
     "discount": 25,
     "images": [
       "src/assets/Volume I/Afsanay/2.1.jpg",
@@ -259,17 +257,13 @@
       "Cultural storytelling elements"
     ],
     "sizes": [
-      "XS",
       "S",
       "M",
       "L",
       "XL"
     ],
     "colors": [
-      "Sage",
-      "Terracotta",
-      "Indigo",
-      "Cream"
+      "Beige"
     ],
     "inStock": true,
     "stockQuantity": 42,
@@ -285,61 +279,57 @@
       "Unique",
       "Artistic"
     ],
-    "fabric": "Premium cotton with traditional block prints"
+    "fabric": "Tarry cotton | 190 gsm | TDF print"
   },
   {
-  "id": 5,
-  "name": "Raah-e-Manzil",
-  "brand": "SOCH",
-  "category": "Clothes",
-  "subCategory": "Volume I",
-  "price": 4200,
-  "originalPrice": 5800,
-  "discount": 25,
-  "images": [
-    "src/assets/Volume I/Raah-e-manzil/2.1.jpg",
-    "src/assets/Volume I/Raah-e-manzil/2.2.jpg",
-    "src/assets/Volume I/Raah-e-manzil/2.3.jpg"
-  ],
-  "description": "Volume One - The Beginning of SOCH\nIntroducing our debut drop: Volume One - a\nbold expression of minimal design and rich\nculture. Crafted with 100% premium cotton\nthis limited-edition drop-shoulder T-shirt\nbrings comfort and streetwear elegance\ntogether.",
-  "longDescription": "Volume One - The Beginning of SOCH\nIntroducing our debut drop: Volume One - a\nbold expression of minimal design and rich\nculture. Crafted with 100% premium cotton\nthis limited-edition drop-shoulder T-shirt\nbrings comfort and streetwear elegance\ntogether.",
-  "features": [
-    "Journey-inspired designs",
-    "Innovative fabric combinations",
-    "Contemporary cuts",
-    "Traditional craftsmanship",
-    "Timeless appeal",
-    "Unique design elements"
-  ],
-  "sizes": [
-    
-    "S",
-    "M",
-    "L",
-    "XL"
-   
-  ],
-  "colors": [
-    "Charcoal"
-    
-  ],
-  "inStock": true,
-  "stockQuantity": 38,
-  "rating": 4.9,
-  "reviewCount": 73,
-  "shipping": "Free shipping on all orders",
-  "returnPolicy": "7 days replacement guarantee",
-  "tags": [
-    "Journey",
-    "Innovation",
-    "Traditional",
-    "Contemporary",
-    "Timeless",
-    "Unique"
-  ],
-  "fabric": "Premium cotton and silk blend with traditional embroidery"
-}
-,
+    "id": 5,
+    "name": "Raah-e-Manzil",
+    "brand": "SOCH",
+    "category": "Clothes",
+    "subCategory": "Volume I",
+    "price": 3550,
+    "originalPrice": 4720,
+    "discount": 25,
+    "images": [
+      "src/assets/Volume I/Raah-e-manzil/2.1.jpg",
+      "src/assets/Volume I/Raah-e-manzil/2.2.jpg",
+      "src/assets/Volume I/Raah-e-manzil/2.3.jpg"
+    ],
+    "description": "Wrap yourself in culture with our “All About Tradition Vibe” oversized tee. Featuring a striking Persian rug–inspired design and bold Urdu typography, it’s where heritage meets street style. Made from soft, breathable fabric for all-day comfort, this piece makes a statement without saying a word. Perfect for those who wear their roots with pride.",
+    "longDescription": "Wrap yourself in culture with our “All About Tradition Vibe” oversized tee. Featuring a striking Persian rug–inspired design and bold Urdu typography, it’s where heritage meets street style. Made from soft, breathable fabric for all-day comfort, this piece makes a statement without saying a word. Perfect for those who wear their roots with pride.",
+    "features": [
+      "Journey-inspired designs",
+      "Innovative fabric combinations",
+      "Contemporary cuts",
+      "Traditional craftsmanship",
+      "Timeless appeal",
+      "Unique design elements"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Charcoal"
+    ],
+    "inStock": true,
+    "stockQuantity": 38,
+    "rating": 4.9,
+    "reviewCount": 73,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": [
+      "Journey",
+      "Innovation",
+      "Traditional",
+      "Contemporary",
+      "Timeless",
+      "Unique"
+    ],
+    "fabric": "Premium cotton and silk blend with traditional embroidery"
+  },
   {
     "id": 6,
     "name": "Éclat Royale-Impression of Creed Aventus",
@@ -363,9 +353,9 @@
     ],
     "sizes": [
       {
-        "size": "50ml",
-        "price": 2500,
-        "originalPrice": 3500,
+        "size": "10ml",
+        "price": 850,
+        "originalPrice": 1150,
         "image": "src/assets/logo.png"
       },
       {
@@ -375,9 +365,9 @@
         "image": "src/assets/logo.png"
       },
       {
-        "size": "10ml",
-        "price": 850,
-        "originalPrice": 1150,
+        "size": "50ml",
+        "price": 2500,
+        "originalPrice": 3500,
         "image": "src/assets/logo.png"
       }
     ],
@@ -418,84 +408,84 @@
       ]
     }
   },
-{
-  "id": 7,
-  "name": "Roselina-Impression of Delina",
-  "brand": "SOCH",
-  "category": "Fragrances",
-  "subCategory": "Women",
-  "price": 2500,
-  "originalPrice": 3500,
-  "discount": 25,
-  "images": [
-    "src/assets/logo.png",
-    "src/assets/logo.png",
-    "src/assets/logo.png"
-  ],
-  "description": "Roselina – The Bloom of Modern Elegance",
-  "longDescription": "Indulge in a fragrance that whispers romance yet commands attention. Roselina is an exquisite interpretation of the iconic Delina — offering the same captivating charm at a price that makes luxury beautifully accessible.\n\nOpening with sparkling notes of lychee, rhubarb, and bergamot, Roselina greets you with a burst of freshness that feels both playful and refined. At its heart, Turkish rose blooms in harmony with peony and lily-of-the-valley, creating a bouquet that's irresistibly feminine. The base wraps you in cashmere-soft musk, creamy vanilla, and a hint of vetiver, leaving a trail as delicate as it is unforgettable.\n\nWhether for an afternoon garden party or an intimate evening affair, Roselina lets you carry the elegance of French perfumery without the indulgent price tag.",
-  "features": [
-    "Luxury within reach – the Delina-inspired scent you adore, at a fraction of the cost",
-    "Unmistakably feminine & romantic – a fragrance that turns moments into memories",
-    "Long-lasting allure – crafted to linger gracefully from morning to night"
-  ],
-  "sizes": [
-    {
-      "size": "50ml",
-      "price": 2500,
-      "originalPrice": 3500,
-      "image": "src/assets/logo.png"
-    },
-    {
-      "size": "30ml",
-      "price": 1800,
-      "originalPrice": 2400,
-      "image": "src/assets/logo.png"
-    },
-    {
-      "size": "10ml",
-      "price": 850,
-      "originalPrice": 1150,
-      "image": "src/assets/logo.png"
+  {
+    "id": 7,
+    "name": "Roselina-Impression of Delina",
+    "brand": "SOCH",
+    "category": "Fragrances",
+    "subCategory": "Women",
+    "price": 2500,
+    "originalPrice": 3500,
+    "discount": 25,
+    "images": [
+      "src/assets/logo.png",
+      "src/assets/logo.png",
+      "src/assets/logo.png"
+    ],
+    "description": "Roselina – The Bloom of Modern Elegance",
+    "longDescription": "Indulge in a fragrance that whispers romance yet commands attention. Roselina is an exquisite interpretation of the iconic Delina — offering the same captivating charm at a price that makes luxury beautifully accessible.\n\nOpening with sparkling notes of lychee, rhubarb, and bergamot, Roselina greets you with a burst of freshness that feels both playful and refined. At its heart, Turkish rose blooms in harmony with peony and lily-of-the-valley, creating a bouquet that's irresistibly feminine. The base wraps you in cashmere-soft musk, creamy vanilla, and a hint of vetiver, leaving a trail as delicate as it is unforgettable.\n\nWhether for an afternoon garden party or an intimate evening affair, Roselina lets you carry the elegance of French perfumery without the indulgent price tag.",
+    "features": [
+      "Luxury within reach – the Delina-inspired scent you adore, at a fraction of the cost",
+      "Unmistakably feminine & romantic – a fragrance that turns moments into memories",
+      "Long-lasting allure – crafted to linger gracefully from morning to night"
+    ],
+    "sizes": [
+      {
+        "size": "10ml",
+        "price": 850,
+        "originalPrice": 1150,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "30ml",
+        "price": 1800,
+        "originalPrice": 2400,
+        "image": "src/assets/logo.png"
+      },
+      {
+        "size": "50ml",
+        "price": 2500,
+        "originalPrice": 3500,
+        "image": "src/assets/logo.png"
+      }
+    ],
+    "colors": [
+      "Clear"
+    ],
+    "inStock": true,
+    "stockQuantity": 45,
+    "rating": 4.8,
+    "reviewCount": 134,
+    "shipping": "Free shipping on all orders",
+    "returnPolicy": "7 days replacement guarantee",
+    "tags": [
+      "Fragrance",
+      "Women",
+      "Luxury",
+      "Delina",
+      "Feminine",
+      "Romantic"
+    ],
+    "notes": {
+      "top": [
+        "Lychee",
+        "Rhubarb",
+        "Bergamot",
+        "Nutmeg"
+      ],
+      "heart": [
+        "Turkish Rose",
+        "Peony",
+        "Lily of the Valley",
+        "Petalia"
+      ],
+      "base": [
+        "Vanilla",
+        "Musk",
+        "Cashmeran",
+        "Cedarwood",
+        "Haitian Vetiver"
+      ]
     }
-  ],
-  "colors": [
-    "Clear"
-  ],
-  "inStock": true,
-  "stockQuantity": 45,
-  "rating": 4.8,
-  "reviewCount": 134,
-  "shipping": "Free shipping on all orders",
-  "returnPolicy": "7 days replacement guarantee",
-  "tags": [
-    "Fragrance",
-    "Women",
-    "Luxury",
-    "Delina",
-    "Feminine",
-    "Romantic"
-  ],
-  "notes": {
-    "top": [
-      "Lychee",
-      "Rhubarb",
-      "Bergamot",
-      "Nutmeg"
-    ],
-    "heart": [
-      "Turkish Rose",
-      "Peony",
-      "Lily of the Valley",
-      "Petalia"
-    ],
-    "base": [
-      "Vanilla",
-      "Musk",
-      "Cashmeran",
-      "Cedarwood",
-      "Haitian Vetiver"
-    ]
   }
-}
 ]

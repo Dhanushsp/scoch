@@ -53,8 +53,8 @@ export const productImages = {
   5: [raahEManzilImage1, raahEManzilImage2, raahEManzilImage3], // Raah-e-Manzil
   
   // Perfume Products
-  6: [eclatRoyaleImage1, eclatRoyaleImage2, eclatRoyaleImage3], // Éclat Royale
-  7: [roselinaImage1, roselinaImage2, roselinaImage3], // Roselina
+  6: [eclatRoyaleImage3, eclatRoyaleImage2, eclatRoyaleImage1], // Éclat Royale
+  7: [roselinaImage3, roselinaImage2, roselinaImage1], // Roselina
 };
 
 // Export individual images

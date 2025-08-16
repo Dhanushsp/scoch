@@ -282,7 +282,7 @@ const Checkout = () => {
                     <span className="text-gray-700">Cash on Delivery</span>
                   </div>
                 </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
+                {/* <label className="flex items-center space-x-3 cursor-pointer">
                   <input
                     type="radio"
                     name="paymentMethod"
@@ -295,7 +295,7 @@ const Checkout = () => {
                     <CreditCard className="w-5 h-5 text-gray-600" />
                     <span className="text-gray-700">Credit/Debit Card</span>
                   </div>
-                </label>
+                </label> */}
               </div>
                 </div>
 
@@ -319,10 +319,14 @@ const Checkout = () => {
               {cartItems.map((product, index) => (
                 <div key={`${product.id}-${product.size}`} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
                   <img
-                    src={product.image}
+                    src={product.image || '/src/assets/logo.png'}
                     alt={product.name}
-                      className="w-16 h-16 object-cover rounded-lg"
-                    />
+                    className="w-16 h-16 object-cover rounded-lg"
+                    onError={(e) => {
+                      e.target.src = '/src/assets/logo.png';
+                      e.target.onerror = null; // Prevent infinite loop
+                    }}
+                  />
                     <div className="flex-1">
                     <h3 className="font-medium text-black">{product.name}</h3>
                     <p className="text-sm text-gray-600">
