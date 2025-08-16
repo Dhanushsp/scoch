@@ -15,6 +15,7 @@ const ProductDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef(null);
 
   // Find product from universal data
@@ -22,31 +23,40 @@ const ProductDetail = () => {
   
   // Debug: Log product structure to help identify issues
   console.log('Product found:', product);
+  console.log('Product ID:', id);
+  console.log('Product category:', product?.category);
   if (product && product.sizes) {
     console.log('Product sizes:', product.sizes);
     console.log('Sizes type:', typeof product.sizes);
     console.log('Is array:', Array.isArray(product.sizes));
+    if (Array.isArray(product.sizes)) {
+      product.sizes.forEach((size, index) => {
+        console.log(`Size ${index}:`, size);
+        console.log(`Size ${index} type:`, typeof size);
+        console.log(`Size ${index} keys:`, Object.keys(size));
+      });
+    }
   }
 
-  // Get current price based on selected size (for perfumes)
+  // Get current price based on selected size (for fragrances)
   const getCurrentPrice = () => {
-    if (product.category === 'Perfumes' && selectedSize && product.sizes) {
+    if (product.category === 'Fragrances' && selectedSize && product.sizes) {
       const sizeObj = product.sizes.find(s => s.size === selectedSize);
       return sizeObj ? sizeObj.price : product.price;
     }
     return product.price;
   };
 
-  // Get current original price based on selected size (for perfumes)
+  // Get current original price based on selected size (for fragrances)
   const getCurrentOriginalPrice = () => {
-    if (product.category === 'Perfumes' && selectedSize && product.sizes) {
+    if (product.category === 'Fragrances' && selectedSize && product.sizes) {
       const sizeObj = product.sizes.find(s => s.size === selectedSize);
       return sizeObj ? sizeObj.originalPrice : product.originalPrice;
     }
     return product.originalPrice;
   };
 
-  // Get current discount based on selected size (for perfumes)
+  // Get current discount based on selected size (for fragrances)
   const getCurrentDiscount = () => {
     const currentPrice = getCurrentPrice();
     const currentOriginalPrice = getCurrentOriginalPrice();
@@ -96,13 +106,18 @@ const ProductDetail = () => {
 
   // Auto-select first size for fragrances when component loads (10ml first)
   useEffect(() => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0 && !selectedSize) {
+    if (product && product.category === 'Fragrances' && product.sizes && product.sizes.length > 0 && !selectedSize) {
       // Sort sizes to ensure 10ml is first, then 30ml, then 50ml
       const sortedSizes = [...product.sizes].sort((a, b) => {
         const sizeOrder = { '10ml': 1, '30ml': 2, '50ml': 3 };
         return (sizeOrder[a.size] || 0) - (sizeOrder[b.size] || 0);
       });
       setSelectedSize(sortedSizes[0].size);
+    }
+    
+    // Set loading to false once product is loaded
+    if (product) {
+      setIsLoading(false);
     }
   }, [product, selectedSize]);
 
@@ -111,6 +126,36 @@ const ProductDetail = () => {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-serif text-black mb-4">Product not found</h1>
+          <button
+            onClick={() => navigate('/')}
+            className="px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-colors"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-serif text-black mb-4">Loading...</h1>
+        </div>
+      </div>
+    );
+  }
+
+  // Additional safety check for product structure
+  if (!product.sizes || !Array.isArray(product.sizes)) {
+    console.error('Product sizes are not properly structured:', product.sizes);
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-serif text-black mb-4">Product data error</h1>
+          <p className="text-gray-600 mb-4">Product sizes are not properly configured</p>
           <button
             onClick={() => navigate('/')}
             className="px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-colors"
@@ -297,10 +342,10 @@ const ProductDetail = () => {
             {/* Size Selection */}
             <div>
               <h3 className="text-lg font-medium text-black mb-4">
-                {product.category === 'Perfumes' ? 'Select Size' : 'Select Size'}
+                {product.category === 'Fragrances' ? 'Select Size' : 'Select Size'}
               </h3>
               <div className="grid grid-cols-3 gap-3">
-                {product.category === 'Perfumes' && product.sizes && Array.isArray(product.sizes) ? (
+                {product.category === 'Fragrances' && product.sizes && Array.isArray(product.sizes) ? (
                   // For perfumes, show size with pricing - reordered: 10ml, 30ml, 50ml
                   (() => {
                     console.log('Product sizes before sorting:', product.sizes);
@@ -318,6 +363,12 @@ const ProductDetail = () => {
                         return null;
                       }
                       
+                      // Additional safety check for required properties
+                      if (!sizeObj.size || !sizeObj.price) {
+                        console.log('SizeObj missing required properties:', sizeObj);
+                        return null;
+                      }
+                      
                       // Debug logging for each size object
                       console.log('Rendering sizeObj:', sizeObj);
                       console.log('sizeObj.size:', sizeObj.size);
@@ -325,29 +376,29 @@ const ProductDetail = () => {
                       console.log('sizeObj type:', typeof sizeObj);
                       console.log('sizeObj keys:', Object.keys(sizeObj));
                       
-                      return (
-                        <button
-                          key={`size-${sizeObj.size || index}`}
-                          onClick={() => setSelectedSize(sizeObj.size)}
-                          disabled={!product.inStock}
-                          className={`p-4 border-2 rounded-lg text-center transition-all ${selectedSize === sizeObj.size
-                            ? 'border-black bg-black text-white'
-                            : product.inStock
-                              ? 'border-gray-200 hover:border-gray-300'
-                              : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
-                            }`}
-                        >
-                          <div className="font-medium">{String(sizeObj.size || 'N/A')}</div>
-                          <div className="text-sm">
-                            Rs. {sizeObj.price ? String(sizeObj.price).toLocaleString() : 'N/A'}
+                                          return (
+                      <button
+                        key={`size-${String(sizeObj.size) || index}`}
+                        onClick={() => setSelectedSize(String(sizeObj.size))}
+                        disabled={!product.inStock}
+                        className={`p-4 border-2 rounded-lg text-center transition-all ${selectedSize === String(sizeObj.size)
+                          ? 'border-black bg-black text-white'
+                          : product.inStock
+                            ? 'border-gray-200 hover:border-gray-300'
+                            : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
+                          }`}
+                      >
+                        <div className="font-medium">{String(sizeObj.size || 'N/A')}</div>
+                        <div className="text-sm">
+                          Rs. {sizeObj.price ? String(sizeObj.price).toLocaleString() : 'N/A'}
+                        </div>
+                        {sizeObj.originalPrice && sizeObj.price && sizeObj.originalPrice > sizeObj.price && (
+                          <div className="text-xs line-through opacity-75">
+                            Rs. {String(sizeObj.originalPrice).toLocaleString()}
                           </div>
-                          {sizeObj.originalPrice && sizeObj.price && sizeObj.originalPrice > sizeObj.price && (
-                            <div className="text-xs line-through opacity-75">
-                              Rs. {String(sizeObj.originalPrice).toLocaleString()}
-                            </div>
-                          )}
-                        </button>
-                      );
+                        )}
+                      </button>
+                    );
                     });
                   })()
                 ) : product.sizes && Array.isArray(product.sizes) ? (
@@ -465,8 +516,8 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Fragrance Notes for Perfumes */}
-            {product.category === 'Perfumes' && product.notes && (
+            {/* Fragrance Notes for Fragrances */}
+            {product.category === 'Fragrances' && product.notes && (
               <div>
                 <h3 className="text-lg font-medium text-black mb-4">Fragrance Notes</h3>
                 <div className="space-y-3">

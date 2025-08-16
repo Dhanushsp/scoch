@@ -189,7 +189,7 @@
     "brand": "SOCH",
     "category": "Clothes",
     "subCategory": "Volume I",
-    "price": 4000,
+    "price": 3750,
     "originalPrice": 5000,
     "discount": 25,
     "images": [
@@ -238,7 +238,7 @@
     "brand": "SOCH",
     "category": "Clothes",
     "subCategory": "Volume I",
-    "price": 3800,
+    "price": 3150,
     "originalPrice": 4200,
     "discount": 25,
     "images": [
@@ -336,7 +336,7 @@
     "brand": "SOCH",
     "category": "Fragrances",
     "subCategory": "Men",
-    "price": 2500,
+    "price": 2625,
     "originalPrice": 3500,
     "discount": 25,
     "images": [
@@ -354,7 +354,7 @@
     "sizes": [
       {
         "size": "10ml",
-        "price": 850,
+        "price": 862,
         "originalPrice": 1150,
         "image": "src/assets/logo.png"
       },
@@ -366,7 +366,7 @@
       },
       {
         "size": "50ml",
-        "price": 2500,
+        "price": 2625,
         "originalPrice": 3500,
         "image": "src/assets/logo.png"
       }
@@ -414,7 +414,7 @@
     "brand": "SOCH",
     "category": "Fragrances",
     "subCategory": "Women",
-    "price": 2500,
+    "price": 2625,
     "originalPrice": 3500,
     "discount": 25,
     "images": [
@@ -432,7 +432,7 @@
     "sizes": [
       {
         "size": "10ml",
-        "price": 850,
+        "price": 862,
         "originalPrice": 1150,
         "image": "src/assets/logo.png"
       },
@@ -444,7 +444,7 @@
       },
       {
         "size": "50ml",
-        "price": 2500,
+        "price": 2625,
         "originalPrice": 3500,
         "image": "src/assets/logo.png"
       }
