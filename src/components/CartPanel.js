@@ -86,7 +86,7 @@ const CartPanel = () => {
                         {item.color && <span>Color: {item.color}</span>}
                       </div>
                       <p className="text-primary font-semibold text-sm">
-                        ${item.price}
+                        Rs. {item.price}
                       </p>
                     </div>
 
@@ -132,7 +132,7 @@ const CartPanel = () => {
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-text-dark">Total:</span>
                 <span className="text-xl font-bold text-primary">
-                  ${calculateTotal().toFixed(2)}
+                  Rs. {calculateTotal().toFixed(2)}
                 </span>
               </div>
 

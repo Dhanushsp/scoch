@@ -85,7 +85,7 @@ const Checkout = () => {
           total: item.price * item.quantity
         })),
         subtotal: subtotal.toFixed(2),
-        shipping: shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`,
+        shipping: shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`,
         tax: tax.toFixed(2),
         total: total.toFixed(2),
         orderDate: new Date().toLocaleString()
@@ -335,7 +335,7 @@ const Checkout = () => {
                     <p className="text-sm text-gray-600">Qty: {product.quantity}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-black">${(product.price * product.quantity).toFixed(2)}</p>
+                    <p className="font-medium text-black">Rs. {(product.price * product.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 ))}
@@ -345,22 +345,22 @@ const Checkout = () => {
               <div className="border-t border-gray-200 pt-4 space-y-3">
                 <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="text-black">${subtotal.toFixed(2)}</span>
+                <span className="text-black">Rs. {subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
                 <span className="text-black">
-                  {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                  {shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`}
                 </span>
                 </div>
                 <div className="flex justify-between">
                 <span className="text-gray-600">Tax</span>
-                <span className="text-black">${tax.toFixed(2)}</span>
+                <span className="text-black">Rs. {tax.toFixed(2)}</span>
                 </div>
                 <div className="border-t border-gray-200 pt-3">
                   <div className="flex justify-between">
                   <span className="text-lg font-medium text-black">Total</span>
-                  <span className="text-lg font-medium text-black">${total.toFixed(2)}</span>
+                  <span className="text-lg font-medium text-black">Rs. {total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
@@ -397,7 +397,7 @@ const Checkout = () => {
                   : 'bg-black text-white hover:bg-gray-800'
               }`}
             >
-              {isSubmitting ? 'Processing Order...' : `Place Order - $${total.toFixed(2)}`}
+                              {isSubmitting ? 'Processing Order...' : `Place Order - Rs. ${total.toFixed(2)}`}
             </button>
           </div>
         </div>

@@ -10,7 +10,6 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
@@ -202,8 +201,8 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = () => {
-    if (!selectedSize || !selectedColor) {
-      alert('Please select both size and color');
+    if (!selectedSize) {
+      alert('Please select a size');
       return;
     }
 
@@ -216,7 +215,7 @@ const ProductDetail = () => {
       price: typeof currentPrice === 'number' ? currentPrice : product.price,
       image: productImages && productImages.length > 0 ? productImages[0] : (product.images && product.images[0] ? product.images[0] : ''),
       size: selectedSize || '',
-      color: selectedColor || '',
+      color: 'Default',
       quantity: quantity || 1
     };
 
@@ -228,8 +227,8 @@ const ProductDetail = () => {
   };
 
   const handleBuyNow = () => {
-    if (!selectedSize || !selectedColor) {
-      alert('Please select both size and color');
+    if (!selectedSize) {
+      alert('Please select a size');
       return;
     }
 
@@ -242,7 +241,7 @@ const ProductDetail = () => {
       price: typeof currentPrice === 'number' ? currentPrice : product.price,
       image: productImages && productImages.length > 0 ? productImages[0] : (product.images && product.images[0] ? product.images[0] : ''),
       size: selectedSize || '',
-      color: selectedColor || '',
+      color: 'Default',
       quantity: quantity || 1
     };
 
@@ -494,27 +493,7 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Color Selection */}
-            <div>
-              <h3 className="text-lg font-medium text-black mb-4">Select Color</h3>
-              <div className="flex space-x-3">
-                {product.colors && Array.isArray(product.colors) && product.colors.map((color) => (
-                  <button
-                    key={String(color)}
-                    onClick={() => setSelectedColor(color)}
-                    disabled={!product.inStock}
-                    className={`px-4 py-2 border-2 rounded-lg transition-all ${selectedColor === color
-                      ? 'border-black bg-black text-white'
-                      : product.inStock
-                        ? 'border-gray-200 hover:border-gray-300'
-                        : 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
-                      }`}
-                  >
-                    {String(color || 'N/A')}
-                  </button>
-                ))}
-              </div>
-            </div>
+
 
             {/* Quantity */}
             <div>
@@ -639,7 +618,7 @@ const ProductDetail = () => {
                   <Truck className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-medium text-black mb-2">Free Shipping</h3>
-                <p className="text-gray-600">Free shipping on all orders above $50</p>
+                <p className="text-gray-600">Free shipping on all orders above Rs. 5000</p>
               </div>
 
               {/* 7 Days Replacement */}
