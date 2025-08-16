@@ -356,19 +356,19 @@
         "size": "10ml",
         "price": 862,
         "originalPrice": 1150,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Éclat Royale-Impression of Creed Aventus/10ml.png"
       },
       {
         "size": "30ml",
         "price": 1800,
         "originalPrice": 2400,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Éclat Royale-Impression of Creed Aventus/30ml.png"
       },
       {
         "size": "50ml",
         "price": 2625,
         "originalPrice": 3500,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Éclat Royale-Impression of Creed Aventus/50ml.png"
       }
     ],
     "colors": [
@@ -434,19 +434,19 @@
         "size": "10ml",
         "price": 862,
         "originalPrice": 1150,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Roselina-Impression of Delina/10ml.png"
       },
       {
         "size": "30ml",
         "price": 1800,
         "originalPrice": 2400,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Roselina-Impression of Delina/30ml.png"
       },
       {
         "size": "50ml",
         "price": 2625,
         "originalPrice": 3500,
-        "image": "src/assets/logo.png"
+        "image": "/src/assets/Perfumes/Roselina-Impression of Delina/50ml.png"
       }
     ],
     "colors": [

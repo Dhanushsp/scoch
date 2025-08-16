@@ -66,6 +66,29 @@ const ProductDetail = () => {
     return product.discount;
   };
 
+  // Get current image based on selected size (for fragrances)
+  const getCurrentImage = () => {
+    if (product.category === 'Fragrances' && selectedSize && product.sizes) {
+      const sizeObj = product.sizes.find(s => s.size === selectedSize);
+      if (sizeObj && sizeObj.size) {
+        // Map size to the correct image index from productImages
+        const sizeOrder = { '10ml': 0, '30ml': 1, '50ml': 2 };
+        const imageIndex = sizeOrder[sizeObj.size];
+        const productImages = getProductImagesById(product.id);
+        if (productImages && productImages[imageIndex]) {
+          return productImages[imageIndex];
+        }
+      }
+    }
+    
+    // Fallback to product images
+    const productImages = getProductImagesById(product.id);
+    if (productImages && productImages.length > 0) {
+      return productImages[currentImageIndex] || productImages[0];
+    }
+    return product.images && product.images[0] ? product.images[0] : '';
+  };
+
   // Size guide data
   const sizeGuideData = {
     measurements: [
@@ -120,6 +143,17 @@ const ProductDetail = () => {
       setIsLoading(false);
     }
   }, [product, selectedSize]);
+
+  // Update current image when selected size changes for fragrances
+  useEffect(() => {
+    if (product && product.category === 'Fragrances' && selectedSize) {
+      const sizeOrder = { '10ml': 0, '30ml': 1, '50ml': 2 };
+      const imageIndex = sizeOrder[selectedSize];
+      if (imageIndex !== undefined) {
+        setCurrentImageIndex(imageIndex);
+      }
+    }
+  }, [selectedSize, product]);
 
   if (!product) {
     return (
@@ -253,43 +287,76 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div className="relative group">
               <img
-                src={(() => {
-                  const images = getProductImagesById(product.id);
-                  if (images && images.length > 0) {
-                    return images[currentImageIndex] || images[0];
-                  }
-                  return product.images && product.images[0] ? product.images[0] : '';
-                })()}
+                src={getCurrentImage()}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover rounded-2xl shadow-lg"
               />
               <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
                 <ZoomIn className="w-12 h-12 text-white" />
               </div>
+              {/* Size indicator for fragrances */}
+              {product.category === 'Fragrances' && selectedSize && (
+                <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {selectedSize}
+                </div>
+              )}
             </div>
 
             {/* Thumbnail Images */}
             <div className="flex space-x-4">
-              {(() => {
-                const images = getProductImagesById(product.id);
-                if (images && images.length > 0) {
-                  return images.map((image, index) => (
+              {product.category === 'Fragrances' && product.sizes && Array.isArray(product.sizes) ? (
+                // For fragrances, show size-specific images as thumbnails
+                product.sizes.map((sizeObj, index) => {
+                  if (!sizeObj || typeof sizeObj !== 'object') return null;
+                  
+                  return (
                     <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${currentImageIndex === index ? 'border-black' : 'border-gray-200'
-                        }`}
+                      key={`size-${String(sizeObj.size)}`}
+                      onClick={() => setSelectedSize(String(sizeObj.size))}
+                      className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all relative ${
+                        selectedSize === String(sizeObj.size) ? 'border-black' : 'border-gray-200'
+                      }`}
                     >
                       <img
-                        src={image}
-                        alt={`${product.name} ${index + 1}`}
+                        src={(() => {
+                          const sizeOrder = { '10ml': 0, '30ml': 1, '50ml': 2 };
+                          const imageIndex = sizeOrder[sizeObj.size];
+                          const productImages = getProductImagesById(product.id);
+                          return productImages && productImages[imageIndex] ? productImages[imageIndex] : '';
+                        })()}
+                        alt={`${product.name} ${sizeObj.size}`}
                         className="w-full h-full object-cover"
                       />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs text-center py-1">
+                        {sizeObj.size}
+                      </div>
                     </button>
-                  ));
-                }
-                return null;
-              })()}
+                  );
+                })
+              ) : (
+                // For other products, show standard image thumbnails
+                (() => {
+                  const images = getProductImagesById(product.id);
+                  if (images && images.length > 0) {
+                    return images.map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === index ? 'border-black' : 'border-gray-200'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ));
+                  }
+                  return null;
+                })()
+              )}
             </div>
           </div>
 
@@ -308,7 +375,7 @@ const ProductDetail = () => {
                   </span>
                 )}
               </div>
-              <p className="text-lg text-gray-600 mb-4">
+              <p className="text-base md:text-lg text-gray-600 mb-4">
                 {product.longDescription}
               </p>
 
