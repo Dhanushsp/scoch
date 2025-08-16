@@ -44,8 +44,8 @@ import roselinaImage3 from '../assets/Perfumes/Roselina-Impression of Delina/10m
 // Export all product images
 export const productImages = {
   // Volume II Products
-  1: [satinRegentImage1, satinRegentImage2, satinRegentImage3], // Satin Regent Co-ord
-  2: [shamrayEstateImage1, shamrayEstateImage2, shamrayEstateImage3], // Shamray Estate Co-ord
+  1: [satinRegentImage3, satinRegentImage2, satinRegentImage1], // Satin Regent Co-ord
+  2: [shamrayEstateImage2, shamrayEstateImage1, shamrayEstateImage3], // Shamray Estate Co-ord
   
   // Volume I Products
   3: [heritageRebelImage1, heritageRebelImage2, heritageRebelImage3], // The Heritage Rebel

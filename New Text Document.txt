@@ -1,0 +1,1 @@
+add togggle to top right next to cart icon in the nav bar to open a side navbar that lists : volume 1, volume 2 and fragrenced

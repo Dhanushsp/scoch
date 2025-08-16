@@ -10,28 +10,28 @@ const NewArrivals = () => {
 
   // Get products that are NOT in Volume I or Volume II (to avoid duplication)
   const otherProducts = productsData.filter(product => 
-    product.category !== "Perfumes" && 
+    product.category !== "Fragrances" && 
     product.subCategory !== "Volume I" && 
     product.subCategory !== "Volume II"
   );
 
   // Helper functions for dynamic pricing
   const getDisplayPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       return product.sizes[0].price; // Default to first size price
     }
     return product.price;
   };
 
   const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       return product.sizes[0].originalPrice; // Default to first size original price
     }
     return product.originalPrice;
   };
 
   const getDisplayDiscount = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       const size = product.sizes[0];
       if (size.originalPrice > size.price) {
         return Math.round(((size.originalPrice - size.price) / size.originalPrice) * 100);
@@ -93,7 +93,7 @@ const NewArrivals = () => {
                 <img
                   src={product.images[0]}
                   alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
                 />
                 
                 {/* Discount Badge */}

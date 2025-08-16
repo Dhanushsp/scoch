@@ -5,6 +5,12 @@ import productsData from '../data/products.json';
 import { useCart } from '../contexts/CartContext';
 import { getProductImagesById } from '../utils/imageUtils';
 
+// Size chart image paths for specific products
+const SIZE_CHART_IMAGES = {
+  'Raah-e-Manzil': '/src/assets/Volume I/Raah-e-manzil/size-chart.jpg',
+  'Afsanay': '/src/assets/Volume I/Afsanay/size-chart.jpg'
+};
+
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -48,8 +54,62 @@ const ProductDetail = () => {
     return product.discount;
   };
 
-  // Size guide data
-  const sizeGuideData = {
+  // Get current image based on selected size (for fragrances)
+  const getCurrentImage = () => {
+    if (product.category === 'Fragrances' && selectedSize && product.sizes) {
+      const sizeObj = product.sizes.find(s => s.size === selectedSize);
+      if (sizeObj && sizeObj.image) {
+        // If size has a specific image, use it
+        return sizeObj.image;
+      }
+    }
+    
+    // For fragrances, use the imported images from productImages.js
+    if (product.category === 'Fragrances') {
+      const fragranceImages = getProductImagesById(product.id);
+      console.log('Fragrance images for product', product.id, ':', fragranceImages);
+      if (fragranceImages && fragranceImages.length > 0) {
+        return fragranceImages[currentImageIndex] || fragranceImages[0];
+      }
+    }
+    
+    // Default to the first product image
+    return getProductImagesById(product.id)[currentImageIndex] || getProductImagesById(product.id)[0];
+  };
+
+  // Get size chart image for specific products
+  const getSizeChartImage = () => {
+    return SIZE_CHART_IMAGES[product.name] || null;
+  };
+
+  // Handle size selection for fragrances and clothing
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
+    // Reset image index to 0 when size changes for fragrances
+    if (product.category === 'Fragrances') {
+      setCurrentImageIndex(0);
+    }
+  };
+
+  // Size guide data - use product's specific size chart if available, otherwise use generic
+  const sizeGuideData = product.sizeChart ? {
+    measurements: Object.entries(product.sizeChart).map(([size, measurements]) => ({
+      size,
+      shirt: measurements.shirt,
+      shorts: measurements.shorts
+    })),
+    instructions: [
+      'Chest: Measure around the fullest part of your chest',
+      'Length: Measure from shoulder to desired length',
+      'Sleeves: Measure sleeve length from shoulder to end',
+      'Sleeves Width: Measure around the fullest part of sleeve',
+      'Shoulder: Measure across the back from shoulder to shoulder',
+      'Waist: Measure around your natural waistline',
+      'Bottom Width: Measure the width at the bottom of shorts',
+      'Use a flexible measuring tape for accurate results',
+      'Keep the tape snug but not tight'
+    ]
+  } : {
     measurements: [
       { size: 'XS', chest: '32-34"', waist: '26-28"', hips: '34-36"' },
       { size: 'S', chest: '34-36"', waist: '28-30"', hips: '36-38"' },
@@ -85,6 +145,13 @@ const ProductDetail = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Auto-select first size for fragrances when component loads
+  useEffect(() => {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0 && !selectedSize) {
+      setSelectedSize(product.sizes[0].size);
+    }
+  }, [product, selectedSize]);
 
   if (!product) {
     return (
@@ -182,34 +249,78 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image Section */}
           <div className="space-y-6">
-          <div className="relative group">
+                      <div className="relative group">
               <img
-                src={getProductImagesById(product.id)[currentImageIndex] || getProductImagesById(product.id)[0]}
+                src={getCurrentImage()}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover rounded-2xl shadow-lg"
               />
               <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
                 <ZoomIn className="w-12 h-12 text-white" />
               </div>
+              
+              {/* Size Label for Fragrances */}
+              {product.category === 'Fragrances' && selectedSize && (
+                <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+                  {selectedSize}
+                </div>
+              )}
             </div>
             
             {/* Thumbnail Images */}
             <div className="flex space-x-4">
-              {getProductImagesById(product.id).map((image, index) => (
+              {product.category === 'Fragrances' && selectedSize ? (
+                // For fragrances with selected size, show size-specific image
                 <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    currentImageIndex === index ? 'border-black' : 'border-gray-200'
-                  }`}
+                  className="w-20 h-20 rounded-lg overflow-hidden border-2 border-black transition-all"
                 >
                   <img
-                    src={image}
-                    alt={`${product.name} ${index + 1}`}
+                    src={getCurrentImage()}
+                    alt={`${product.name} ${selectedSize}`}
                     className="w-full h-full object-cover"
                   />
-              </button>
-              ))}
+                </button>
+              ) : (
+                // For clothing or fragrances without size selection, show all product images
+                (() => {
+                  const images = getProductImagesById(product.id);
+                  if (product.category === 'Fragrances' && images && images.length > 0) {
+                    // For fragrances, show all available images as thumbnails
+                    return images.map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === index ? 'border-black' : 'border-gray-200'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ));
+                  } else {
+                    // For clothing or other products, show all product images
+                    return getProductImagesById(product.id).map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === index ? 'border-black' : 'border-gray-200'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ));
+                  }
+                })()
+              )}
             </div>
           </div>
 
@@ -248,37 +359,20 @@ const ProductDetail = () => {
                   </>
                 )}
               </div>
-
-              {/* Rating */}
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 ${
-                        i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-gray-600 ml-2">
-                  {product.rating} ({product.reviewCount} reviews)
-                </span>
-              </div>
             </div>
 
             {/* Size Selection */}
             <div>
               <h3 className="text-lg font-medium text-black mb-4">
-                {product.category === 'Perfumes' ? 'Select Size' : 'Select Size'}
+                {product.category === 'Fragrances' ? 'Select Size' : 'Select Size'}
               </h3>
               <div className="grid grid-cols-3 gap-3">
-                {product.category === 'Perfumes' && product.sizes ? (
-                  // For perfumes, show size with pricing
+                {product.category === 'Fragrances' && product.sizes ? (
+                  // For fragrances, show size with pricing
                   product.sizes.map((sizeObj) => (
                     <button
                       key={sizeObj.size}
-                      onClick={() => setSelectedSize(sizeObj.size)}
+                      onClick={() => handleSizeSelection(sizeObj.size)}
                       disabled={!product.inStock}
                       className={`p-4 border-2 rounded-lg text-center transition-all ${
                         selectedSize === sizeObj.size
@@ -290,11 +384,11 @@ const ProductDetail = () => {
                     >
                       <div className="font-medium">{sizeObj.size}</div>
                       <div className="text-sm">
-                        Rs. {sizeObj.price.toLocaleString()}
+                        Rs. {getCurrentPrice().toLocaleString()}
                       </div>
-                      {sizeObj.originalPrice > sizeObj.price && (
+                      {getCurrentOriginalPrice() && getCurrentOriginalPrice() > getCurrentPrice() && (
                         <div className="text-xs line-through opacity-75">
-                          Rs. {sizeObj.originalPrice.toLocaleString()}
+                          Rs. {getCurrentOriginalPrice().toLocaleString()}
                         </div>
                       )}
                     </button>
@@ -304,7 +398,7 @@ const ProductDetail = () => {
                   product.sizes.map((size) => (
                     <button
                       key={size}
-                      onClick={() => setSelectedSize(size)}
+                      onClick={() => handleSizeSelection(size)}
                       disabled={!product.inStock}
                       className={`p-4 border-2 rounded-lg text-center transition-all ${
                         selectedSize === size
@@ -500,10 +594,13 @@ const ProductDetail = () => {
       {/* Size Guide Modal - Only for clothing */}
       {isSizeGuideOpen && product.category === 'Clothes' && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-serif font-medium text-black">Size Guide</h2>
+                <div>
+                  <h2 className="text-2xl font-serif font-medium text-black">Size Guide</h2>
+                  <p className="text-sm text-gray-600 mt-1">Size guide for {product.name}</p>
+                </div>
                 <button
                   onClick={() => setIsSizeGuideOpen(false)}
                   className="text-gray-400 hover:text-black transition-colors"
@@ -513,55 +610,155 @@ const ProductDetail = () => {
               </div>
             </div>
             
-            <div className="p-6 space-y-6">
-              {/* How to Measure */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">How to Measure</h3>
-                <ul className="space-y-2">
-                  {sizeGuideData.instructions.map((instruction, index) => (
-                    <li key={index} className="text-gray-600 flex items-start">
-                      <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      {instruction}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Size Chart */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-2 px-4 font-medium text-black">Size</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Chest</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Waist</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Hips</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sizeGuideData.measurements.map((measurement, index) => (
-                        <tr key={index} className="border-b border-gray-100">
-                          <td className="py-2 px-4 font-medium text-black">{measurement.size}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.chest}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.waist}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.hips}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+            <div className="p-6">
+              {/* Check if product has a size chart image */}
+              {getSizeChartImage() ? (
+                // Show size chart image for specific products
+                <div className="text-center">
+                  <div className="mb-6">
+                    <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
+                    <p className="text-gray-600 mb-4">
+                      Below is the size chart for {product.name}. Use this guide to find your perfect fit.
+                    </p>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <img
+                      src={getSizeChartImage()}
+                      alt={`Size Chart for ${product.name}`}
+                      className="max-w-full h-auto rounded-lg shadow-lg"
+                      style={{ maxHeight: '70vh' }}
+                    />
+                  </div>
+                  
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <h4 className="font-medium text-black mb-2">How to Use This Size Chart</h4>
+                    <ul className="text-sm text-gray-600 space-y-1 text-left max-w-md mx-auto">
+                      <li>• Measure your chest, waist, and hips</li>
+                      <li>• Compare your measurements with the chart</li>
+                      <li>• Choose the size that best fits your measurements</li>
+                      <li>• If between sizes, we recommend sizing up</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                // Show custom size guide for other products
+                <div className="space-y-6">
+                  {/* How to Measure */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">How to Measure</h3>
+                    <ul className="space-y-2">
+                      {sizeGuideData.instructions.map((instruction, index) => (
+                        <li key={index} className="text-gray-600 flex items-start">
+                          <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                          {instruction}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-              {/* Tips */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">Tips</h3>
-                <p className="text-gray-600">
-                  If you're between sizes, we recommend sizing up for a more comfortable fit. 
-                  All measurements are in inches. For the most accurate fit, have someone help you measure.
-                </p>
-              </div>
+                  {/* Size Chart */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
+                    {product.sizeChart && (
+                      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-sm text-blue-800">
+                          📏 <strong>Product-Specific Measurements:</strong> Below are the exact measurements for {product.name}
+                        </p>
+                      </div>
+                    )}
+                    <div className="overflow-x-auto">
+                      {product.sizeChart ? (
+                        // Product-specific size chart
+                        <div className="space-y-6">
+                          {sizeGuideData.measurements.map((measurement, index) => (
+                            <div key={index} className="border border-gray-200 rounded-lg p-4">
+                              <h4 className="font-medium text-black mb-3 text-center">Size {measurement.size}</h4>
+                              
+                              {/* Shirt Measurements */}
+                              <div className="mb-4">
+                                <h5 className="text-sm font-medium text-gray-700 mb-2">Shirt</h5>
+                                <div className="grid grid-cols-2 gap-3 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Chest:</span>
+                                    <span className="font-medium">{measurement.shirt.chest}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Length:</span>
+                                    <span className="font-medium">{measurement.shirt.length}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Sleeves:</span>
+                                    <span className="font-medium">{measurement.shirt.sleeves}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Sleeves Width:</span>
+                                    <span className="font-medium">{measurement.shirt.sleevesWidth}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Shoulder:</span>
+                                    <span className="font-medium">{measurement.shirt.shoulder}"</span>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              {/* Shorts Measurements */}
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-700 mb-2">Shorts</h5>
+                                <div className="grid grid-cols-2 gap-3 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Length:</span>
+                                    <span className="font-medium">{measurement.shorts.length}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Waist:</span>
+                                    <span className="font-medium">{measurement.shorts.waist}"</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Bottom Width:</span>
+                                    <span className="font-medium">{measurement.shorts.bottomWidth}"</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        // Generic size chart fallback
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b border-gray-200">
+                              <th className="text-left py-2 px-4 font-medium text-black">Size</th>
+                              <th className="text-left py-2 px-4 font-medium text-black">Chest</th>
+                              <th className="text-left py-2 px-4 font-medium text-black">Waist</th>
+                              <th className="text-left py-2 px-4 font-medium text-black">Hips</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {sizeGuideData.measurements.map((measurement, index) => (
+                              <tr key={index} className="border-b border-gray-100">
+                                <td className="py-2 px-4 font-medium text-black">{measurement.size}</td>
+                                <td className="py-2 px-4 text-gray-600">{measurement.chest}</td>
+                                <td className="px-4 text-gray-600">{measurement.waist}</td>
+                                <td className="px-4 text-gray-600">{measurement.hips}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Tips */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Tips</h3>
+                    <p className="text-gray-600">
+                      If you're between sizes, we recommend sizing up for a more comfortable fit. 
+                      All measurements are in inches. For the most accurate fit, have someone help you measure.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="p-6 border-t border-gray-100">

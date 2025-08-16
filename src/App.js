@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Banner from './components/Banner';
 import FeaturedProducts from './components/FeaturedProducts';
 import BestSelling from './components/BestSelling';
+import DropOne from './components/DropOne';
 import Perfumes from './components/Perfumes';
 import Reviews from './components/Reviews';
 // import ReturnPolicy from './components/ReturnPolicy';
@@ -12,6 +13,7 @@ import ProductDetail from './components/ProductDetail';
 import CartPanel from './components/CartPanel';
 import Checkout from './components/Checkout';
 import AboutUs from './components/AboutUs';
+import ShippingPolicy from './components/ShippingPolicy';
 import { CartProvider } from './contexts/CartContext';
 
 // Component to handle scroll to top on route changes
@@ -31,6 +33,7 @@ function App() {
       <Banner />
       <FeaturedProducts />
       <BestSelling />
+      <DropOne />
       <Perfumes />
       <Reviews />
       
@@ -57,6 +60,10 @@ function App() {
               <Route 
                 path="/about" 
                 element={<AboutUs />} 
+              />
+              <Route 
+                path="/shipping-policy" 
+                element={<ShippingPolicy />} 
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

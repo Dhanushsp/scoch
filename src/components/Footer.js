@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4 md:mb-6">SOCH</h3>
+            <img src={logo} className='h-20 w-auto'/>
             
             <div className="flex space-x-4 md:space-x-6">
               {/* Instagram */}
@@ -46,18 +47,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg">
-                  Shipping and Returns
-                </a>
-              </li>
-              <li>
                 <button 
-                  onClick={() => navigate('/about')}
+                  onClick={() => navigate('/shipping-policy')}
                   className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
                 >
-                  Explore SOCH
+                  Shipping Policy
                 </button>
               </li>
+              
              
             </ul>
           </div>

@@ -16,21 +16,21 @@ const Banner = () => {
   return (
     <section className="relative bg-white text-black overflow-hidden ">
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <div className="relative z-10  ">
         <div className="text-center">
           <a href='#' className={`block mb-8 md:mb-12 transition-all duration-1000 ease-out transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <img 
               src={banner} 
-              className='w-full max-w-5xl mx-auto rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500' 
+              className='w-full  shadow-lg hover:shadow-xl transition-all duration-500' 
               alt="Banner"
             />
           </a>
-          <p className={`text-4xl md:text-5xl lg:text-6xl my-6 md:my-8 max-w-4xl mx-auto text-black font-serif leading-tight font-medium transition-all duration-1000 ease-out delay-300 transform ${
+          <p className={`text-2xl md:text-5xl lg:text-6xl my-6 md:my-8 max-w-4xl mx-auto text-black font-serif leading-tight font-medium transition-all duration-1000 ease-out delay-300 transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            Promoting Art to Trend and Strich
+            Promoting Art to Trend & Stitch
           </p>
           
         </div>

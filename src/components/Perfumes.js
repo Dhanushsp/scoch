@@ -8,34 +8,41 @@ const Perfumes = () => {
   const navigate = useNavigate();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'men', 'women'
 
-  // Get all perfume products
-  const perfumeProducts = productsData.filter(product => 
-    product.category === "Perfumes"
+  // Get all fragrance products
+  const allPerfumeProducts = productsData.filter(product => 
+    product.category === "Fragrances"
   );
+
+  // Filter products based on active filter
+  const perfumeProducts = allPerfumeProducts.filter(product => {
+    if (activeFilter === 'all') return true;
+    return product.subCategory === activeFilter;
+  });
 
   // Helper functions for dynamic pricing
   const getDisplayPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       return product.sizes[0].price; // Default to first size price
     }
     return product.price;
   };
 
   const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       return product.sizes[0].originalPrice; // Default to first size original price
     }
     return product.originalPrice;
   };
 
   const getDisplayDiscount = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       const size = product.sizes[0];
       if (size.originalPrice > size.price) {
         return Math.round(((size.originalPrice - size.price) / size.originalPrice) * 100);
+        }
       }
-    }
     return product.discount || 0;
   };
 
@@ -65,21 +72,63 @@ const Perfumes = () => {
   }
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-16 bg-white">
+    <section ref={sectionRef} data-section="perfumes" className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
-            Perfumes
+          <h2 className="text-lg md:text-xl font-serif font-medium text-gray-600 mb-6">
+            Fragrances
           </h2>
-          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
             Discover our exclusive collection of luxury fragrances
+          </p>
+        </div>
+
+        {/* Filter Buttons */}
+        <div className="flex flex-col items-center mb-8 md:mb-12">
+          <div className="flex space-x-2 md:space-x-4 bg-gray-100 p-1 md:p-2 rounded-xl mb-4">
+            <button
+              onClick={() => setActiveFilter('all')}
+              className={`px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium rounded-lg transition-all duration-200 ${
+                activeFilter === 'all'
+                  ? 'bg-black text-white shadow-lg'
+                  : 'text-gray-600 hover:text-black hover:bg-white'
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setActiveFilter('Men')}
+              className={`px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium rounded-lg transition-all duration-200 ${
+                activeFilter === 'Men'
+                  ? 'bg-black text-white shadow-lg'
+                  : 'text-gray-600 hover:text-black hover:bg-white'
+              }`}
+            >
+              Men
+            </button>
+            <button
+              onClick={() => setActiveFilter('Women')}
+              className={`px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium rounded-lg transition-all duration-200 ${
+                activeFilter === 'Women'
+                  ? 'bg-black text-white shadow-lg'
+                  : 'text-gray-600 hover:text-black hover:bg-white'
+              }`}
+            >
+              Women
+            </button>
+          </div>
+          
+          {/* Product Count */}
+          <p className="text-sm text-gray-500 font-medium">
+            {perfumeProducts.length} product{perfumeProducts.length !== 1 ? 's' : ''} found
           </p>
         </div>
         
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
-          {perfumeProducts.map((product, index) => (
+        {perfumeProducts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+            {perfumeProducts.map((product, index) => (
             <div
               key={product.id}
               className={`group transition-all duration-1000 ease-out transform ${
@@ -89,11 +138,11 @@ const Perfumes = () => {
             >
               {/* Product Image */}
               <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
-                <img
-                  src={getFirstProductImageById(product.id)}
-                  alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                                 <img
+                   src={getFirstProductImageById(product.id)}
+                   alt={product.name}
+                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
+                 />
                 
                 {/* Discount Badge */}
                 {getDisplayDiscount(product) > 0 && (
@@ -143,26 +192,19 @@ const Perfumes = () => {
                   )}
                 </div>
 
-                {/* Rating */}
-                <div className="flex items-center justify-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="text-sm text-gray-500 ml-2">
-                    ({product.reviewCount})
-                  </span>
-                </div>
 
 
               </div>
             </div>
           ))}
         </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-500 font-medium">
+              No fragrances found in this category.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

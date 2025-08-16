@@ -9,8 +9,8 @@ const BestSelling = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Get best selling products (all Volume I products)
-  const bestSellingProducts = productsData.filter(product => product.subCategory === "Volume I");
+  // Get best selling products (only Raah-e-Manzil from Volume I)
+  const bestSellingProducts = productsData.filter(product => product.name === "Raah-e-Manzil");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,8 +36,8 @@ const BestSelling = () => {
   };
 
   const getDisplayPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest price
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
+      // For fragrances, show the lowest price
       const lowestPrice = Math.min(...product.sizes.map(s => s.price));
       return lowestPrice;
     }
@@ -45,8 +45,8 @@ const BestSelling = () => {
   };
 
   const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Perfumes' && product.sizes && product.sizes.length > 0) {
-      // For perfumes, show the lowest original price
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
+      // For fragrances, show the lowest original price
       const lowestOriginalPrice = Math.min(...product.sizes.map(s => s.originalPrice));
       return lowestOriginalPrice;
     }
@@ -63,17 +63,20 @@ const BestSelling = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-16 bg-gray-50">
+    <section ref={sectionRef} data-section="best-selling" className="py-6 md:py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
+          <h2 className="text-lg md:text-xl font-serif font-medium text-black mb-6">
             Best Selling
           </h2>
-          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
             Our most loved and highly rated products
+          </p>
+          <p className="text-sm md:text-base max-w-2xl mx-auto mt-4">
+            Volume - I
           </p>
         </div>
         
@@ -92,7 +95,7 @@ const BestSelling = () => {
                 <img
                   src={getFirstProductImageById(product.id)}
                   alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
                 />
                 
                 {/* Discount Badge */}
@@ -137,28 +140,6 @@ const BestSelling = () => {
                     </span>
                   )}
                 </div>
-
-                {/* Rating */}
-                <div className="flex items-center justify-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="text-sm text-gray-500 ml-2">
-                    ({product.reviewCount})
-                  </span>
-                </div>
-
-                {/* Category Badge */}
-                <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-4">
-                  {product.category}
-                </div>
-
-
               </div>
             </div>
           ))}

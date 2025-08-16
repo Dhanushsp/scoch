@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star, ShoppingCart, Eye } from 'lucide-react';
+import { Star, Eye, ShoppingCart } from 'lucide-react';
 import productsData from '../data/products.json';
 import { getFirstProductImageById } from '../utils/imageUtils';
 
-const FeaturedProducts = () => {
+const DropOne = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Get featured products (all Volume II products)
-  const featuredProducts = productsData.filter(product => product.subCategory === "Volume II");
+  // Get Drop I products (The Heritage Rebel and Afsanay)
+  const dropOneProducts = productsData.filter(product => 
+    product.name === "The Heritage Rebel" || product.name === "Afsanay"
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,50 +38,42 @@ const FeaturedProducts = () => {
   };
 
   const getDisplayPrice = (product) => {
-    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
-      // For fragrances, show the lowest price
-      const lowestPrice = Math.min(...product.sizes.map(s => s.price));
-      return lowestPrice;
-    }
     return product.price;
   };
 
   const getDisplayOriginalPrice = (product) => {
-    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
-      // For fragrances, show the lowest original price
-      const lowestOriginalPrice = Math.min(...product.sizes.map(s => s.originalPrice));
-      return lowestOriginalPrice;
-    }
     return product.originalPrice;
   };
 
   const getDisplayDiscount = (product) => {
-    const currentPrice = getDisplayPrice(product);
-    const currentOriginalPrice = getDisplayOriginalPrice(product);
-    if (currentOriginalPrice && currentPrice) {
-      return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
+    if (product.originalPrice && product.price) {
+      return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
     }
     return product.discount;
   };
 
+  if (dropOneProducts.length === 0) {
+    return null; // Don't render if no products
+  }
+
   return (
-    <section ref={sectionRef} data-section="featured-products" className="pb-12 md:pb-16 bg-white">
+    <section ref={sectionRef} data-section="drop-one" className="py-6 md:py-8 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
+        <div className={`text-center mb-8 md:mb-12 transition-all duration-1000 ease-out transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-lg md:text-xl font-serif font-medium mb-6">
-            Featured Products
+          <h2 className="text-lg md:text-xl font-serif font-medium text-black mb-6">
+            Drop - I
           </h2>
           <p className="text-sm md:text-base max-w-2xl mx-auto">
-            Volume - II
+            Exclusive limited edition pieces
           </p>
         </div>
         
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {featuredProducts.map((product, index) => (
+          {dropOneProducts.map((product, index) => (
             <div
               key={product.id}
               className={`group transition-all duration-1000 ease-out transform ${
@@ -89,11 +83,11 @@ const FeaturedProducts = () => {
             >
               {/* Product Image */}
               <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
-                <img
-                  src={getFirstProductImageById(product.id)}
-                  alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
-                />
+                                            <img
+                              src={getFirstProductImageById(product.id)}
+                              alt={product.name}
+                              className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
+                            />
                 
                 {/* Discount Badge */}
                 {getDisplayDiscount(product) > 0 && (
@@ -137,9 +131,6 @@ const FeaturedProducts = () => {
                     </span>
                   )}
                 </div>
-
-
-
               </div>
             </div>
           ))}
@@ -149,4 +140,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default DropOne;

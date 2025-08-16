@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Truck, Package } from 'lucide-react';
 
 // Import review images from assets
 import reviewImage1 from '../assets/reviews/1.jpg';
@@ -80,16 +81,16 @@ const Reviews = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-white">
+    <section ref={sectionRef} className="py-10 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-16 md:mb-20 transition-all duration-1000 ease-out transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-gray-600 mb-6">
+          <h2 className="text-lg md:text-xl lg:text-6xl font-serif font-medium text-black mb-6">
             Customer Reviews
           </h2>
-          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
+          <p className="text-xs md:text-base text-black max-w-2xl mx-auto">
             Discover what our valued customers have to say about their SOCH experience
           </p>
         </div>
@@ -123,43 +124,9 @@ const Reviews = () => {
               <div className={`transition-all duration-700 ease-out transform ${
                 isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}>
-                {/* Customer Image and Info */}
-                <div className="flex flex-col items-center text-center mb-8 md:mb-12">
-                  <div className="relative mb-6">
-                    <img
-                      src={reviews[currentReview].image}
-                      alt={reviews[currentReview].name}
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover border-4 border-white shadow-lg"
-                    />
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-black rounded-full flex items-center justify-center">
-                      <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-white fill-current" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-2xl md:text-3xl font-serif font-medium text-black mb-3">
-                    {reviews[currentReview].name}
-                  </h3>
-                  
-                  {/* Star Rating */}
-                  <div className="flex items-center space-x-1 mb-4">
-                    {[...Array(reviews[currentReview].rating)].map((_, i) => (
-                      <Star
-                          key={i}
-                        className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-                </div>
+                
 
-                {/* Review Text */}
-                <div className="text-center mb-8 md:mb-12">
-                  <blockquote className="text-lg md:text-xl text-gray-600 leading-relaxed italic">
-                    "{reviews[currentReview].review}"
-                  </blockquote>
-                </div>
-
+               
                 {/* Review Image Section */}
                 <div className="text-center">
                   <div className="inline-block">
@@ -167,13 +134,11 @@ const Reviews = () => {
                       <img
                         src={reviews[currentReview].reviewImage}
                         alt={`${reviews[currentReview].name}'s review`}
-                        className="w-full h-48 sm:h-56 md:h-64 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl rounded-2xl shadow-lg border border-gray-100 object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="w-auto h-96 sm:h-80 max-w-xs sm:max-w-sm  rounded-2xl shadow-lg border border-gray-100 object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                     </div>
-                    <p className="text-sm text-gray-500 mt-3 font-medium">
-                      {reviews[currentReview].name}'s Experience
-                    </p>
+                    
                   </div>
                 </div>
               </div>
@@ -213,6 +178,44 @@ const Reviews = () => {
           </p>
         </div>
       </div>
+
+      <div className="grid grid-cols-2 gap-8 md:gap-12 my-8 px-4">
+                    {/* Free Shipping */}
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Truck className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-base font-medium text-black mb-2">Free Shipping</h3>
+                      <p className="text-gray-600 text-sm">Free shipping on all orders above $50</p>
+                    </div>
+      
+                    {/* 7 Days Replacement */}
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Package className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-base font-medium text-black mb-2">7 Days Replacement</h3>
+                      <p className="text-gray-600 text-sm">Easy returns and replacements within 7 days</p>
+                    </div>
+      
+                    {/* 24 Hours Support */}
+                    {/* <div className="text-center">
+                      <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Clock className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-xl font-medium text-black mb-2">24 Hours Support</h3>
+                      <p className="text-gray-600">Round the clock customer support available</p>
+                    </div> */}
+      
+                    {/* Cash on Delivery */}
+                    {/* <div className="text-center">
+                      <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                        <CreditCard className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-xl font-medium text-black mb-2">Cash on Delivery</h3>
+                      <p className="text-gray-600">Pay when you receive your order</p>
+                    </div> */}
+                  </div>
     </section>
   );
 };
