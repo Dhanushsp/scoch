@@ -41,11 +41,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Quick Links</h4>
             <ul className="space-y-2 md:space-y-3">
-              <li>
+              {/* <li>
                 <a href="#" className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg">
                   View All Products
                 </a>
-              </li>
+              </li> */}
                           <li>
               <button
                 onClick={() => navigate('/shipping-policy')}

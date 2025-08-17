@@ -22,9 +22,8 @@ const Checkout = () => {
 
   // Calculate totals
   const subtotal = cartItems.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-  const shipping = subtotal > 50 ? 0 : 9.99;
-  const tax = subtotal * 0.08; // 8% tax
-  const total = subtotal + shipping + tax;
+  const shipping = subtotal > 5000 ? 0 : 500; // Free shipping above Rs. 5000
+  const total = subtotal + shipping;
 
   // Web3Forms configuration
   const web3FormsKey = 'b0d6c9a1-3592-495b-8684-61007f23d308'; // Replace with your actual key
@@ -86,7 +85,6 @@ const Checkout = () => {
         })),
         subtotal: subtotal.toFixed(2),
         shipping: shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`,
-        tax: tax.toFixed(2),
         total: total.toFixed(2),
         orderDate: new Date().toLocaleString()
       };
