@@ -30,6 +30,10 @@ import raahEManzilImage1 from '../assets/Volume I/Raah-e-manzil/2.1.jpg';
 import raahEManzilImage2 from '../assets/Volume I/Raah-e-manzil/2.2.jpg';
 import raahEManzilImage3 from '../assets/Volume I/Raah-e-manzil/2.3.jpg';
 
+// Size Chart Images - Commented out until images are added
+// import afsanaySizeChart from '../assets/Volume I/Afsanay/size-chart.jpg';
+// import raahEManzilSizeChart from '../assets/Volume I/Raah-e-manzil/size-chart.jpg';
+
 // Product Images - Perfumes (these actually exist)
 import eclatRoyaleImage1 from '../assets/Perfumes/Éclat Royale-Impression of Creed Aventus/50ml.png';
 import eclatRoyaleImage2 from '../assets/Perfumes/Éclat Royale-Impression of Creed Aventus/30ml.png';
@@ -49,7 +53,7 @@ export const productImages = {
   
   // Volume I Products
   3: [heritageRebelImage1, heritageRebelImage2, heritageRebelImage3], // The Heritage Rebel
-  4: [afsanayImage1, afsanayImage2, afsanayImage3], // Afsanay
+  4: [afsanayImage3, afsanayImage2, afsanayImage1], // Afsanay
   5: [raahEManzilImage1, raahEManzilImage2, raahEManzilImage3], // Raah-e-Manzil
   
   // Perfume Products
@@ -69,3 +73,13 @@ export const getFirstProductImage = (productId) => {
 
 // Export other images
 export { logoImage, bannerImage };
+
+// Export size chart images - Currently disabled until images are added
+export const sizeChartImages = {
+  // 4: afsanaySizeChart, // Afsanay - Uncomment when image is added
+  // 5: raahEManzilSizeChart, // Raah-e-Manzil - Uncomment when image is added
+};
+
+export const getSizeChartImage = (productId) => {
+  return sizeChartImages[productId] || null;
+};

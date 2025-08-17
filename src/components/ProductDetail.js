@@ -410,7 +410,7 @@ const ProductDetail = () => {
               <h3 className="text-lg font-medium text-black mb-4">
                 {product.category === 'Fragrances' ? 'Select Size' : 'Select Size'}
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {product.category === 'Fragrances' && product.sizes && Array.isArray(product.sizes) ? (
                   // For perfumes, show size with pricing - reordered: 10ml, 30ml, 50ml
                   (() => {
@@ -447,7 +447,7 @@ const ProductDetail = () => {
                         key={`size-${String(sizeObj.size) || index}`}
                         onClick={() => setSelectedSize(String(sizeObj.size))}
                         disabled={!product.inStock}
-                        className={`p-4 border-2 rounded-lg text-center transition-all ${selectedSize === String(sizeObj.size)
+                        className={`p-2 sm:p-4 border-2 rounded-lg text-center transition-all ${selectedSize === String(sizeObj.size)
                           ? 'border-black bg-black text-white'
                           : product.inStock
                             ? 'border-gray-200 hover:border-gray-300'
@@ -455,14 +455,6 @@ const ProductDetail = () => {
                           }`}
                       >
                         <div className="font-medium">{String(sizeObj.size || 'N/A')}</div>
-                        <div className="text-sm">
-                          Rs. {sizeObj.price ? String(sizeObj.price).toLocaleString() : 'N/A'}
-                        </div>
-                        {sizeObj.originalPrice && sizeObj.price && sizeObj.originalPrice > sizeObj.price && (
-                          <div className="text-xs line-through opacity-75">
-                            Rs. {String(sizeObj.originalPrice).toLocaleString()}
-                          </div>
-                        )}
                       </button>
                     );
                     });
@@ -474,7 +466,7 @@ const ProductDetail = () => {
                       key={size}
                       onClick={() => setSelectedSize(size)}
                       disabled={!product.inStock}
-                      className={`p-4 border-2 rounded-lg text-center transition-all ${selectedSize === size
+                      className={`p-2 sm:p-4 border-2 rounded-lg text-center transition-all ${selectedSize === size
                         ? 'border-black bg-black text-white'
                         : product.inStock
                           ? 'border-gray-200 hover:border-gray-300'
@@ -596,6 +588,31 @@ const ProductDetail = () => {
                 <p className="text-gray-600">{product.fabric}</p>
               </div>
             )}
+
+            {/* Care Instructions for Clothing */}
+            {product.category === 'Clothes' && (
+              <div>
+                <h3 className="text-lg font-medium text-black mb-4">Care Instructions</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-600">Machine wash cold with similar colors</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-600">Do not bleach</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-600">Tumble dry on low or hang dry</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-600">Iron inside out on low heat (avoid direct contact with print)</span>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
@@ -669,54 +686,162 @@ const ProductDetail = () => {
             </div>
 
             <div className="p-6 space-y-6">
-              {/* How to Measure */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">How to Measure</h3>
-                <ul className="space-y-2">
-                  {sizeGuideData.instructions.map((instruction, index) => (
-                    <li key={index} className="text-gray-600 flex items-start">
-                      <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      {instruction}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Size Chart */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-2 px-4 font-medium text-black">Size</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Chest</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Waist</th>
-                        <th className="text-left py-2 px-4 font-medium text-black">Hips</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sizeGuideData.measurements.map((measurement, index) => (
-                        <tr key={index} className="border-b border-gray-100">
-                          <td className="py-2 px-4 font-medium text-black">{measurement.size}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.chest}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.waist}</td>
-                          <td className="py-2 px-4 text-gray-600">{measurement.hips}</td>
+              {/* Check if this product should show the short size chart (Volume II) */}
+              {(product.id === 1 || product.id === 2) ? (
+                // Show short size chart for Volume II products (Satin Regent Co-ord and Shamray Estate Co-ord)
+                <div>
+                  <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
+                  
+                  {/* Size Chart Table */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse border border-gray-300">
+                      <thead>
+                        <tr className="bg-gray-50">
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">WAIST</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">BOTTOM WIDTH</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">22</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">24</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">36</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">26</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">38</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">O</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  {/* Chart Information */}
+                  <div className="mt-6 space-y-3">
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-black">FOR SHORT</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-black">SOCH</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-black">SIZE IN CENTIMETER</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (product.id === 4 || product.id === 5) ? (
+                // Show shirt size chart for Volume I products (Afsanay and Raah-e-Manzil)
+                <div>
+                  <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
+                  
+                  {/* Size Chart Table */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse border border-gray-300">
+                      <thead>
+                        <tr className="bg-gray-50">
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">CHEST</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">S</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">20</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">27</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">21</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">28</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">22</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">29</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">23</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">30</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  {/* Chart Information */}
+                  <div className="mt-6 space-y-3">
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-black">FOR SHIRT</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-black">SIZE IN CENTIMETER</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                // Show custom size guide for other clothing products
+                <>
+                  {/* How to Measure */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">How to Measure</h3>
+                    <ul className="space-y-2">
+                      {sizeGuideData.instructions.map((instruction, index) => (
+                        <li key={index} className="text-gray-600 flex items-start">
+                          <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                          {instruction}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-              {/* Tips */}
-              <div>
-                <h3 className="text-lg font-medium text-black mb-3">Tips</h3>
-                <p className="text-gray-600">
-                  If you're between sizes, we recommend sizing up for a more comfortable fit.
-                  All measurements are in inches. For the most accurate fit, have someone help you measure.
-                </p>
-              </div>
+                  {/* Size Chart */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="border-b border-gray-200">
+                            <th className="text-left py-2 px-4 font-medium text-black">Size</th>
+                            <th className="text-left py-2 px-4 font-medium text-black">Chest</th>
+                            <th className="text-left py-2 px-4 font-medium text-black">Waist</th>
+                            <th className="text-left py-2 px-4 font-medium text-black">Hips</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {sizeGuideData.measurements.map((measurement, index) => (
+                            <tr key={index} className="border-b border-gray-100">
+                              <td className="py-2 px-4 font-medium text-black">{measurement.size}</td>
+                              <td className="py-2 px-4 text-gray-600">{measurement.chest}</td>
+                              <td className="py-2 px-4 text-gray-600">{measurement.waist}</td>
+                              <td className="py-2 px-4 text-gray-600">{measurement.hips}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Tips */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Tips</h3>
+                    <p className="text-gray-600">
+                      If you're between sizes, we recommend sizing up for a more comfortable fit.
+                      All measurements are in inches. For the most accurate fit, have someone help you measure.
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="p-6 border-t border-gray-100">

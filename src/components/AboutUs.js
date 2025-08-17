@@ -53,7 +53,7 @@ const AboutUs = () => {
             </h1>
             <div className="w-24 h-1 bg-black mx-auto mb-8"></div>
             <h2 className="text-2xl md:text-3xl font-serif font-medium text-gray-700 mb-8">
-              Promoting Art through 'Print & Stitch'
+              <span className='italic'>Promoting Art through <span className='font-bold'>'Print & Stitch'</span></span>
             </h2>
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
               At Soch, each design tells the story of Pakistan's rich textile heritage, reinterpreted for the modern soul. 

@@ -27,10 +27,10 @@ const Banner = () => {
               alt="Banner"
             />
           </a>
-          <p className={`text-2xl md:text-5xl lg:text-6xl my-6 md:my-8 max-w-4xl mx-auto text-black font-serif leading-tight font-medium transition-all duration-1000 ease-out delay-300 transform ${
+          <p className={`text-xl md:text-5xl my-6 md:my-8 max-w-4xl mx-auto text-black font-serif leading-tight font-medium transition-all duration-1000 ease-out delay-300 transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            Promoting Art to Trend & Stitch
+            <span className='italic'>Promoting Art through <span>Trend & Stitch</span></span>
           </p>
           
         </div>

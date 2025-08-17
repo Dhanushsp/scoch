@@ -175,6 +175,33 @@ const Header = () => {
                   Fragrances
                 </button>
               </li>
+              
+              {/* Divider */}
+              <div className="border-t border-gray-200 my-4"></div>
+              
+              {/* Additional Menu Items */}
+              <li>
+                <button
+                  onClick={() => {
+                    closeSidebar();
+                    navigate('/contact');
+                  }}
+                  className="w-full text-left p-4 text-lg font-medium text-black hover:bg-gray-50 rounded-xl transition-colors duration-200"
+                >
+                  Contact Us
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    closeSidebar();
+                    navigate('/shipping-policy');
+                  }}
+                  className="w-full text-left p-4 text-lg font-medium text-black hover:bg-gray-50 rounded-xl transition-colors duration-200"
+                >
+                  Shipping & Return Policy
+                </button>
+              </li>
             </ul>
           </nav>
         </div>

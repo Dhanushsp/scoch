@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Star, Eye, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import productsData from '../data/products.json';
-import { getFirstProductImageById } from '../utils/imageUtils';
+import { getFirstProductImageById, getProductImagesById } from '../utils/imageUtils';
 
 const Perfumes = () => {
   const navigate = useNavigate();
@@ -24,14 +24,24 @@ const Perfumes = () => {
   // Helper functions for dynamic pricing
   const getDisplayPrice = (product) => {
     if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
-      return product.sizes[0].price; // Default to first size price
+      // For fragrances, show the 10ml price (lowest price)
+      const sortedSizes = [...product.sizes].sort((a, b) => {
+        const sizeOrder = { '10ml': 1, '30ml': 2, '50ml': 3 };
+        return (sizeOrder[a.size] || 0) - (sizeOrder[b.size] || 0);
+      });
+      return sortedSizes[0].price; // Return 10ml price
     }
     return product.price;
   };
 
   const getDisplayOriginalPrice = (product) => {
     if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
-      return product.sizes[0].originalPrice; // Default to first size original price
+      // For fragrances, show the 10ml original price (lowest original price)
+      const sortedSizes = [...product.sizes].sort((a, b) => {
+        const sizeOrder = { '10ml': 1, '30ml': 2, '50ml': 3 };
+        return (sizeOrder[a.size] || 0) - (sizeOrder[b.size] || 0);
+      });
+      return sortedSizes[0].originalPrice; // Return 10ml original price
     }
     return product.originalPrice;
   };
@@ -44,6 +54,24 @@ const Perfumes = () => {
         }
       }
     return product.discount || 0;
+  };
+
+  // Function to get the 50ml image for display
+  const getDisplayImage = (product) => {
+    if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
+      // For fragrances, show the 50ml image (largest size)
+      const sortedSizes = [...product.sizes].sort((a, b) => {
+        const sizeOrder = { '10ml': 1, '30ml': 2, '50ml': 3 };
+        return (sizeOrder[a.size] || 0) - (sizeOrder[b.size] || 0);
+      });
+      // Return the last image (50ml) from productImages
+      const productImages = getProductImagesById(product.id);
+      if (productImages && productImages.length > 0) {
+        return productImages[productImages.length - 1]; // Return 50ml image
+      }
+    }
+    // Fallback to default image
+    return getFirstProductImageById(product.id);
   };
 
   const handleProductClick = (productId) => {
@@ -139,7 +167,7 @@ const Perfumes = () => {
               {/* Product Image */}
               <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
                                  <img
-                   src={getFirstProductImageById(product.id)}
+                   src={getDisplayImage(product)}
                    alt={product.name}
                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
                  />
@@ -180,16 +208,31 @@ const Perfumes = () => {
                   {product.subCategory}
                 </div>
                 
+                {/* Size Indicator for Fragrances */}
+                {/* {product.category === 'Fragrances' && (
+                  <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3 ml-2">
+                    50ml Display
+                  </div>
+                )} */}
+                
                                  {/* Price */}
-                 <div className="flex items-center justify-center space-x-3 mb-4">
-                   <span className="text-2xl font-bold text-black">
-                     Rs. {getDisplayPrice(product).toLocaleString()}
-                   </span>
-                   {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                     <span className="text-lg text-gray-500 line-through">
-                       Rs. {getDisplayOriginalPrice(product).toLocaleString()}
+                 <div className="flex flex-col items-center space-y-2 mb-4">
+                   {/* Starting from text for fragrances */}
+                   {product.category === 'Fragrances' && (
+                     <span className="text-sm text-gray-600 font-medium">
+                       Starting from
                      </span>
                    )}
+                   <div className="flex items-center justify-center space-x-3">
+                     <span className="text-2xl font-bold text-black">
+                       Rs. {getDisplayPrice(product).toLocaleString()}
+                     </span>
+                     {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
+                       <span className="text-lg text-gray-500 line-through">
+                         Rs. {getDisplayOriginalPrice(product).toLocaleString()}
+                       </span>
+                     )}
+                   </div>
                  </div>
                  
                  {/* Savings Amount */}

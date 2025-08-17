@@ -189,8 +189,8 @@
     "brand": "SOCH",
     "category": "Clothes",
     "subCategory": "Volume I",
-    "price": 3750,
-    "originalPrice": 5000,
+    "price": 3550,
+    "originalPrice": 4720,
     "discount": 25,
     "images": [
       "src/assets/Volume I/The heritage rebel/4.1.jpg",
@@ -230,7 +230,7 @@
       "Mughal",
       "Streetwear"
     ],
-    "fabric": "Heavyweight cotton fleece"
+    "fabric": "100% cotton"
   },
   {
     "id": 4,
@@ -238,8 +238,8 @@
     "brand": "SOCH",
     "category": "Clothes",
     "subCategory": "Volume I",
-    "price": 3150,
-    "originalPrice": 4200,
+    "price": 3000,
+    "originalPrice": 4250,
     "discount": 25,
     "images": [
       "src/assets/Volume I/Afsanay/2.1.jpg",
@@ -336,7 +336,7 @@
     "brand": "SOCH",
     "category": "Fragrances",
     "subCategory": "Men",
-    "price": 2625,
+    "price": 2500,
     "originalPrice": 3500,
     "discount": 25,
     "images": [
@@ -354,7 +354,7 @@
     "sizes": [
       {
         "size": "10ml",
-        "price": 862,
+        "price": 850,
         "originalPrice": 1150,
         "image": "/src/assets/Perfumes/Éclat Royale-Impression of Creed Aventus/10ml.png"
       },
@@ -432,7 +432,7 @@
     "sizes": [
       {
         "size": "10ml",
-        "price": 862,
+        "price": 850,
         "originalPrice": 1150,
         "image": "/src/assets/Perfumes/Roselina-Impression of Delina/10ml.png"
       },
@@ -444,7 +444,7 @@
       },
       {
         "size": "50ml",
-        "price": 2625,
+        "price": 2500,
         "originalPrice": 3500,
         "image": "/src/assets/Perfumes/Roselina-Impression of Delina/50ml.png"
       }

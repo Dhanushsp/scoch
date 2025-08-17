@@ -252,14 +252,9 @@ const Checkout = () => {
                     onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:outline-none"
                   >
-                    <option value="United States">United States</option>
-                    <option value="Canada">Canada</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Australia">Australia</option>
-                  <option value="Germany">Germany</option>
-                  <option value="France">France</option>
+                    
                   <option value="Pakistan">Pakistan</option>
-                  <option value="Other">Other</option>
+                  
                   </select>
               </div>
             </div>
@@ -353,10 +348,10 @@ const Checkout = () => {
                   {shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`}
                 </span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                 <span className="text-gray-600">Tax</span>
                 <span className="text-black">Rs. {tax.toFixed(2)}</span>
-                </div>
+                </div> */}
                 <div className="border-t border-gray-200 pt-3">
                   <div className="flex justify-between">
                   <span className="text-lg font-medium text-black">Total</span>

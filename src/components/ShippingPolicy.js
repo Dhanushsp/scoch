@@ -101,14 +101,14 @@ const ShippingPolicy = () => {
                 </div>
 
                 {/* International Shipping */}
-                <div className="pb-6">
+                {/* <div className="pb-6">
                   <h2 className="text-2xl md:text-3xl font-serif font-medium text-black mb-4">
                     International Shipping
                   </h2>
                   <p className="text-gray-700 leading-relaxed">
                     We ship to select international destinations. International orders may incur customs fees, import taxes, or other charges, which are the customer's responsibility. For more details, contact your local customs office.
                   </p>
-                </div>
+                </div> */}
 
                 {/* Closing Statement */}
                 <div className="pt-6 border-t border-gray-200">
@@ -134,15 +134,15 @@ const ShippingPolicy = () => {
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span>soch@gmail.com</span>
+                  <span>muhibaamir2004@gmail.com</span>
                 </div>
-                <div className="flex items-center text-gray-300">
+                {/* <div className="flex items-center text-gray-300">
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <span>Pakistan</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

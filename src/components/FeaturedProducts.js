@@ -69,7 +69,7 @@ const FeaturedProducts = () => {
         <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-lg md:text-xl font-serif font-medium mb-6">
+          <h2 className="text-xl md:text-2xl font-serif font-medium font-bold mb-6">
             Featured Products
           </h2>
           <p className="text-sm md:text-base max-w-2xl mx-auto">
