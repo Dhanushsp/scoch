@@ -157,7 +157,7 @@ const AboutUs = () => {
                 <Truck className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-medium text-black mb-2">Free Shipping</h3>
-                              <p className="text-gray-600">Free shipping on all orders above Rs. 5000</p>
+                              <p className="text-gray-600">Free shipping on all orders</p>
             </div>
 
             {/* 7 Days Replacement */}

@@ -633,7 +633,7 @@ const ProductDetail = () => {
                   <Truck className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-medium text-black mb-2">Free Shipping</h3>
-                <p className="text-gray-600">Free shipping on all orders above Rs. 5000</p>
+                <p className="text-gray-600">Free shipping on all orders</p>
               </div>
 
               {/* 7 Days Replacement */}
@@ -684,60 +684,115 @@ const ProductDetail = () => {
             </div>
 
             <div className="p-6 space-y-6">
-              {/* Check if this product should show the shirt size chart (Volume II) */}
+              {/* Check if this product should show both shirt and shorts size charts (Volume II) */}
               {(product.id === 1 || product.id === 2) ? (
-                // Show shirt size chart for Volume II products (Satin Regent Co-ord and Shamray Estate Co-ord)
-                <div>
-                  <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
-                  
-                  {/* Size Chart Table */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse border border-gray-300">
-                      <thead>
-                        <tr className="bg-gray-50">
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">CHEST</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SLEEVES</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SHOULDER</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">30</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">21</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">6</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">16</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">32</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">24</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">18</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">26</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">19</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                // Show both shirt and shorts size charts for Volume II products (Satin Regent Co-ord and Shamray Estate Co-ord)
+                <div className="space-y-8">
+                  {/* Shirt Size Chart */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Shirt Size Chart</h3>
+                    
+                    {/* Shirt Size Chart Table */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse border border-gray-300">
+                        <thead>
+                          <tr className="bg-gray-50">
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">CHEST</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SLEEVES</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SHOULDER</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">30</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">21</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">6</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">16</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">32</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">24</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">18</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">26</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">19</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                    {/* Shirt Chart Information */}
+                    <div className="mt-6 space-y-3">
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-black">FOR SHIRT</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-black">SOCH</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-black">SIZE IN CENTIMETER</p>
+                      </div>
+                    </div>
                   </div>
-                  
-                  {/* Chart Information */}
-                  <div className="mt-6 space-y-3">
-                    <div className="text-center">
-                      <p className="text-lg font-bold text-black">FOR SHIRT</p>
+
+                  {/* Shorts Size Chart */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-3">Shorts Size Chart</h3>
+                    
+                    {/* Shorts Size Chart Table */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse border border-gray-300">
+                        <thead>
+                          <tr className="bg-gray-50">
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">WAIST</th>
+                            <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">BOTTOM WIDTH</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">22</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">24</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">36</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">26</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">38</td>
+                            <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">9</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-                    <div className="text-center">
-                      <p className="text-lg font-bold text-black">SOCH</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-bold text-black">SIZE IN CENTIMETER</p>
+                    
+                    {/* Shorts Chart Information */}
+                    <div className="mt-6 space-y-3">
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-black">FOR SHORTS</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-black">SOCH</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-black">SIZE IN CENTIMETER</p>
+                      </div>
                     </div>
                   </div>
                 </div>

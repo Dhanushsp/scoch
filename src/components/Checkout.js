@@ -22,7 +22,7 @@ const Checkout = () => {
 
   // Calculate totals
   const subtotal = cartItems.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-  const shipping = subtotal > 5000 ? 0 : 500; // Free shipping above Rs. 5000
+  const shipping = 0; // Free shipping for all products
   const total = subtotal + shipping;
 
   // Web3Forms configuration
@@ -84,7 +84,7 @@ const Checkout = () => {
           total: item.price * item.quantity
         })),
         subtotal: subtotal.toFixed(2),
-        shipping: shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`,
+        shipping: 'Free',
         total: total.toFixed(2),
         orderDate: new Date().toLocaleString()
       };
@@ -362,7 +362,7 @@ const Checkout = () => {
                 <span className="text-sm font-medium">Shipping Information</span>
                 </div>
               <p className="text-sm text-gray-600">
-                Free shipping on orders above Rs. 5000. Standard delivery takes 3-5 business days.
+                Free shipping on all orders. Standard delivery takes 3-5 business days.
                 </p>
               </div>
 
