@@ -51,8 +51,8 @@ const Perfumes = () => {
       const size = product.sizes[0];
       if (size.originalPrice > size.price) {
         return Math.round(((size.originalPrice - size.price) / size.originalPrice) * 100);
-        }
       }
+    }
     return product.discount || 0;
   };
 
@@ -157,99 +157,70 @@ const Perfumes = () => {
         {perfumeProducts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
             {perfumeProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className={`group transition-all duration-1000 ease-out transform ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              {/* Product Image */}
-              <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
-                                 <img
-                   src={getDisplayImage(product)}
-                   alt={product.name}
-                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
-                 />
-                
-                {/* Discount Badge */}
-                {getDisplayDiscount(product) > 0 && (
-                  <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {getDisplayDiscount(product)}% OFF
+              <div
+                key={product.id}
+                className={`group transition-all duration-1000 ease-out transform ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                {/* Product Image */}
+                <div className="relative overflow-hidden rounded-2xl mb-6 group cursor-pointer" onClick={() => handleProductClick(product.id)}>
+                  <img
+                    src={getDisplayImage(product)}
+                    alt={product.name}
+                    className="w-full h-80 object-contain transition-transform duration-500 group-hover:scale-110 mx-auto bg-gray-50"
+                  />
+                  
+                                  {/* Discount Badge - Hidden for perfumes */}
+                  
+                  {/* Sold Out Badge */}
+                  {!product.inStock && (
+                    <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      Sold Out
+                    </div>
+                  )}
+                  
+                  {/* Quick Actions - Removed opacity change on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                      <Eye className="w-5 h-5 text-black" />
+                    </button>
+                    <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                      <ShoppingCart className="w-5 h-5 text-black" />
+                    </button>
                   </div>
-                )}
-                
-                {/* Sold Out Badge */}
-                {!product.inStock && (
-                  <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Sold Out
+                </div>
+
+                {/* Product Info */}
+                <div className="text-center">
+                  <h3 className="text-xl md:text-2xl font-serif font-medium text-black mb-3 group-hover:text-gray-700 transition-colors cursor-pointer" onClick={() => handleProductClick(product.id)}>
+                    {product.name}
+                  </h3>
+                  
+                  {/* Subcategory Badge */}
+                  <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                    {product.subCategory}
                   </div>
-                )}
-                
-                {/* Quick Actions Overlay */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                  <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <Eye className="w-5 h-5 text-black" />
-                  </button>
-                  <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <ShoppingCart className="w-5 h-5 text-black" />
-                  </button>
+                  
+                  {/* Price */}
+                  <div className="flex flex-col items-center space-y-2 mb-4">
+                    {/* Starting from text for fragrances */}
+                    {product.category === 'Fragrances' && (
+                      <span className="text-sm text-gray-600 font-medium">
+                        Starting from
+                      </span>
+                    )}
+                    <div className="flex items-center justify-center space-x-3">
+                      <span className="text-2xl font-bold text-black">
+                        Rs. {getDisplayPrice(product).toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* Product Info */}
-              <div className="text-center">
-                <h3 className="text-xl md:text-2xl font-serif font-medium text-black mb-3 group-hover:text-gray-700 transition-colors cursor-pointer" onClick={() => handleProductClick(product.id)}>
-                  {product.name}
-                </h3>
-                
-                {/* Subcategory Badge */}
-                <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
-                  {product.subCategory}
-                </div>
-                
-                {/* Size Indicator for Fragrances */}
-                {/* {product.category === 'Fragrances' && (
-                  <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3 ml-2">
-                    50ml Display
-                  </div>
-                )} */}
-                
-                                 {/* Price */}
-                 <div className="flex flex-col items-center space-y-2 mb-4">
-                   {/* Starting from text for fragrances */}
-                   {product.category === 'Fragrances' && (
-                     <span className="text-sm text-gray-600 font-medium">
-                       Starting from
-                     </span>
-                   )}
-                   <div className="flex items-center justify-center space-x-3">
-                     <span className="text-2xl font-bold text-black">
-                       Rs. {getDisplayPrice(product).toLocaleString()}
-                     </span>
-                     {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                       <span className="text-lg text-gray-500 line-through">
-                         Rs. {getDisplayOriginalPrice(product).toLocaleString()}
-                       </span>
-                     )}
-                   </div>
-                 </div>
-                 
-                 {/* Savings Amount */}
-                 {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                   <div className="text-center mb-4">
-                     <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                       Save Rs. {(getDisplayOriginalPrice(product) - getDisplayPrice(product)).toLocaleString()}
-                     </span>
-                   </div>
-                 )}
-
-
-
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         ) : (
           <div className="text-center py-12">
             <p className="text-lg text-gray-500 font-medium">

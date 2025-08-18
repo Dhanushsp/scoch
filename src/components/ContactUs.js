@@ -87,7 +87,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-white">
+    <div ref={sectionRef} className="min-h-screen bg-white contact">
       {/* Header */}
       <div className="bg-white border-b border-gray-100 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

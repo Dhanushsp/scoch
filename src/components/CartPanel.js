@@ -68,7 +68,7 @@ const CartPanel = () => {
                     <img
                       src={item.image || '/src/assets/logo.png'}
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                      className="w-16 h-16 object-contain rounded-lg flex-shrink-0 bg-gray-50"
                       onError={(e) => {
                         e.target.src = '/src/assets/logo.png';
                         e.target.onerror = null; // Prevent infinite loop

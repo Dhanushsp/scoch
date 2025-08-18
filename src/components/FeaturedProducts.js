@@ -92,7 +92,7 @@ const FeaturedProducts = () => {
                 <img
                   src={getFirstProductImageById(product.id)}
                   alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110 mx-auto"
+                  className="w-full h-80 object-contain transition-transform duration-500 group-hover:scale-110 mx-auto"
                 />
                 
                 {/* Discount Badge */}
@@ -109,8 +109,8 @@ const FeaturedProducts = () => {
                   </div>
                 )}
                 
-                {/* Quick Actions Overlay */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                {/* Quick Actions - Removed opacity change on hover */}
+                <div className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
                     <Eye className="w-5 h-5 text-black" />
                   </button>
@@ -126,29 +126,26 @@ const FeaturedProducts = () => {
                   {product.name}
                 </h3>
                 
-                                 {/* Price */}
-                 <div className="flex items-center justify-center space-x-3 mb-4">
-                   <span className="text-2xl font-bold text-black">
-                     Rs. {getDisplayPrice(product).toLocaleString()}
-                   </span>
-                   {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                     <span className="text-lg text-gray-500 line-through">
-                       Rs. {getDisplayOriginalPrice(product).toLocaleString()}
-                     </span>
-                   )}
-                 </div>
-                 
-                 {/* Savings Amount */}
-                 {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
-                   <div className="text-center mb-4">
-                     <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                       Save Rs. {(getDisplayOriginalPrice(product) - getDisplayPrice(product)).toLocaleString()}
-                     </span>
-                   </div>
-                 )}
-
-
-
+                {/* Price */}
+                <div className="flex items-center justify-center space-x-3 mb-4">
+                  <span className="text-2xl font-bold text-black">
+                    Rs. {getDisplayPrice(product).toLocaleString()}
+                  </span>
+                  {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
+                    <span className="text-lg text-gray-500 line-through">
+                      Rs. {getDisplayOriginalPrice(product).toLocaleString()}
+                    </span>
+                  )}
+                </div>
+                
+                {/* Savings Amount */}
+                {getDisplayOriginalPrice(product) && getDisplayOriginalPrice(product) > getDisplayPrice(product) && (
+                  <div className="text-center mb-4">
+                    <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      Save Rs. {(getDisplayOriginalPrice(product) - getDisplayPrice(product)).toLocaleString()}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ))}

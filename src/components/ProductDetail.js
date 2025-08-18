@@ -288,11 +288,9 @@ const ProductDetail = () => {
               <img
                 src={getCurrentImage()}
                 alt={product.name}
-                className="w-full h-96 md:h-[500px] object-cover rounded-2xl shadow-lg"
+                className="w-full h-96 md:h-[500px] object-contain rounded-2xl shadow-lg bg-gray-50"
               />
-              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
-                <ZoomIn className="w-12 h-12 text-white" />
-              </div>
+
               {/* Size indicator for fragrances */}
               {product.category === 'Fragrances' && selectedSize && (
                 <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -324,7 +322,7 @@ const ProductDetail = () => {
                           return productImages && productImages[imageIndex] ? productImages[imageIndex] : '';
                         })()}
                         alt={`${product.name} ${sizeObj.size}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-gray-50"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs text-center py-1">
                         {sizeObj.size}
@@ -348,7 +346,7 @@ const ProductDetail = () => {
                         <img
                           src={image}
                           alt={`${product.name} ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain bg-gray-50"
                         />
                       </button>
                     ));
@@ -383,7 +381,7 @@ const ProductDetail = () => {
                 <span className="text-3xl font-bold text-black">
                   Rs. {typeof getCurrentPrice() === 'number' ? getCurrentPrice().toLocaleString() : 'N/A'}
                 </span>
-                {getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
+                {product.category !== 'Fragrances' && getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
                   <>
                     <span className="text-xl text-gray-500 line-through">
                       Rs. {getCurrentOriginalPrice().toLocaleString()}
@@ -395,8 +393,8 @@ const ProductDetail = () => {
                 )}
               </div>
               
-              {/* Savings Amount */}
-              {getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentPrice() && typeof getCurrentPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
+              {/* Savings Amount - Hidden for perfumes */}
+              {product.category !== 'Fragrances' && getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentPrice() && typeof getCurrentPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
                 <div className="mb-6">
                   <span className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-lg text-lg font-medium">
                     🎉 Save Rs. {(getCurrentOriginalPrice() - getCurrentPrice()).toLocaleString()}
@@ -408,7 +406,7 @@ const ProductDetail = () => {
             {/* Size Selection */}
             <div>
               <h3 className="text-lg font-medium text-black mb-4">
-                {product.category === 'Fragrances' ? 'Select Size' : 'Select Size'}
+                {product.category === 'Fragrances' ? 'Select Variant' : 'Select Size'}
               </h3>
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {product.category === 'Fragrances' && product.sizes && Array.isArray(product.sizes) ? (
@@ -686,9 +684,9 @@ const ProductDetail = () => {
             </div>
 
             <div className="p-6 space-y-6">
-              {/* Check if this product should show the short size chart (Volume II) */}
+              {/* Check if this product should show the shirt size chart (Volume II) */}
               {(product.id === 1 || product.id === 2) ? (
-                // Show short size chart for Volume II products (Satin Regent Co-ord and Shamray Estate Co-ord)
+                // Show shirt size chart for Volume II products (Satin Regent Co-ord and Shamray Estate Co-ord)
                 <div>
                   <h3 className="text-lg font-medium text-black mb-3">Size Chart</h3>
                   
@@ -699,28 +697,32 @@ const ProductDetail = () => {
                         <tr className="bg-gray-50">
                           <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SIZE</th>
                           <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">LENGTH</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">WAIST</th>
-                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">BOTTOM WIDTH</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">CHEST</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SLEEVES</th>
+                          <th className="border border-gray-300 py-3 px-4 font-bold text-black text-center">SHOULDER</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">M</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">22</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">30</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">21</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">6</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">16</td>
                         </tr>
                         <tr>
                           <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">L</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">32</td>
                           <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">24</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">36</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">7</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">18</td>
                         </tr>
                         <tr>
                           <td className="border border-gray-300 py-3 px-4 font-medium text-black text-center">XL</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">34</td>
                           <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">26</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">38</td>
-                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">O</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">8</td>
+                          <td className="border border-gray-300 py-3 px-4 text-gray-600 text-center">19</td>
                         </tr>
                       </tbody>
                     </table>
@@ -729,7 +731,7 @@ const ProductDetail = () => {
                   {/* Chart Information */}
                   <div className="mt-6 space-y-3">
                     <div className="text-center">
-                      <p className="text-lg font-bold text-black">FOR SHORT</p>
+                      <p className="text-lg font-bold text-black">FOR SHIRT</p>
                     </div>
                     <div className="text-center">
                       <p className="text-lg font-bold text-black">SOCH</p>

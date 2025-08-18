@@ -314,7 +314,7 @@ const Checkout = () => {
                   <img
                     src={product.image || '/src/assets/logo.png'}
                     alt={product.name}
-                    className="w-16 h-16 object-cover rounded-lg"
+                    className="w-16 h-16 object-contain rounded-lg bg-gray-50"
                     onError={(e) => {
                       e.target.src = '/src/assets/logo.png';
                       e.target.onerror = null; // Prevent infinite loop
@@ -346,10 +346,7 @@ const Checkout = () => {
                   {shipping === 0 ? 'Free' : `Rs. ${shipping.toFixed(2)}`}
                 </span>
                 </div>
-                {/* <div className="flex justify-between">
-                <span className="text-gray-600">Tax</span>
-                <span className="text-black">Rs. {tax.toFixed(2)}</span>
-                </div> */}
+
                 <div className="border-t border-gray-200 pt-3">
                   <div className="flex justify-between">
                   <span className="text-lg font-medium text-black">Total</span>
@@ -365,7 +362,7 @@ const Checkout = () => {
                 <span className="text-sm font-medium">Shipping Information</span>
                 </div>
               <p className="text-sm text-gray-600">
-                Free shipping on All orders. Standard delivery takes 3-5 business days.
+                Free shipping on orders above Rs. 5000. Standard delivery takes 3-5 business days.
                 </p>
               </div>
 

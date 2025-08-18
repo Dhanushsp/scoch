@@ -30,7 +30,7 @@ const Banner = () => {
           <p className={`text-xl md:text-5xl my-6 md:my-8 max-w-4xl mx-auto text-black font-serif leading-tight font-medium transition-all duration-1000 ease-out delay-300 transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            <span className='italic'>Promoting Art through <span>Trend & Stitch</span></span>
+            <span className='italic'>Promoting Art through <span className="font-bold">Print & Stitch</span></span>
           </p>
           
         </div>

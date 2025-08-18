@@ -8,11 +8,17 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-soft-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <img src={logo} className='h-20 w-auto'/>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {/* Brand & Logo Section */}
+          <div className="flex flex-col items-start">
+            <div className="mb-6">
+              <img src={logo} alt="SOCH Logo" className="h-20 w-auto mb-4" />
+              {/* <p className="text-soft-white/80 text-sm md:text-base font-sans max-w-xs">
+                Promoting Art through <span className="italic">'Print & Stitch'</span>
+              </p> */}
+            </div>
             
+            {/* Social Media Links */}
             <div className="flex space-x-4 md:space-x-6">
               {/* Instagram */}
               <a href="https://www.instagram.com/soch.pk_?igsh=cmJuZXgxOTk1MjZl" target="_blank" rel="noopener noreferrer" className="text-soft-white/80 hover:text-soft-white transition-colors duration-200">
@@ -37,70 +43,39 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Quick Links</h4>
+          {/* Contact Info */}
+          <div className="flex flex-col items-start">
+            <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Contact Us</h4>
             <ul className="space-y-2 md:space-y-3">
-              {/* <li>
-                <a href="#" className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg">
-                  View All Products
-                </a>
-              </li> */}
-                          <li>
-              <button
-                onClick={() => navigate('/shipping-policy')}
-                className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
-              >
-                Shipping Policy
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => navigate('/refund-policy')}
-                className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
-              >
-                Refund Policy
-              </button>
-            </li>
-                          <li>
-              <button
-                onClick={() => navigate('/contact')}
-                className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
-              >
-                Contact Us
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => navigate('/refund-policy')}
-                className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
-              >
-                Refund Policy
-              </button>
-            </li>
-              
-             
+              <li className="flex items-center text-soft-white/80 font-sans text-base md:text-lg">
+                <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>muhibaamir2004@gmail.com</span>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Contact Us</h4>
+          {/* Quick Links */}
+          <div className="flex flex-col items-start">
+            <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Quick Links</h4>
             <ul className="space-y-2 md:space-y-3">
-             
-              <li className="flex items-center text-soft-white/80 font-sans text-base md:text-lg">
-                <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                muhibaamir2004@gmail.com
+              <li>
+                <button
+                  onClick={() => navigate('/policies')}
+                  className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
+                >
+                  Shipping & Return Policies
+                </button>
               </li>
-              {/* <li className="flex items-center text-soft-white/80 font-sans text-base md:text-lg">
-                <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Pakistan
-              </li> */}
+              <li>
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="text-soft-white/80 hover:text-soft-white transition-colors duration-200 font-sans text-base md:text-lg text-left w-full"
+                >
+                  Contact Us
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -115,9 +90,9 @@ const Footer = () => {
             <a href="/terms" className="text-soft-white/80 hover:text-soft-white ml-2 transition-colors duration-200">
               Terms of Service
             </a> |
-            <a className="text-soft-white/80 hover:text-soft-white ml-2 transition-colors duration-200">
-              Made by <span><a href='https://www.instagram.com/dhanush_webdev/'>Dhanush</a></span>, India
-            </a>
+            <span className="ml-2">
+              Made by <a href='https://www.instagram.com/dhanush_webdev/' className="text-soft-white/80 hover:text-soft-white transition-colors duration-200">Dhanush</a>, India
+            </span>
           </p>
         </div>
       </div>

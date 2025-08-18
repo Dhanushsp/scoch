@@ -199,7 +199,7 @@ const Header = () => {
                   }}
                   className="w-full text-left p-4 text-lg font-medium text-black hover:bg-gray-50 rounded-xl transition-colors duration-200"
                 >
-                  Shipping & Return Policy
+                  Policies
                 </button>
               </li>
             </ul>

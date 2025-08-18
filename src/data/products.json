@@ -328,7 +328,7 @@
       "Timeless",
       "Unique"
     ],
-    "fabric": "Premium cotton and silk blend with traditional embroidery"
+    "fabric": "Tarry cotton | 210 gsm | Screen print"
   },
   {
     "id": 6,
@@ -338,7 +338,6 @@
     "subCategory": "Men",
     "price": 2500,
     "originalPrice": 3500,
-    "discount": 25,
     "images": [
       "src/assets/logo.png",
       "src/assets/logo.png",
@@ -416,7 +415,6 @@
     "subCategory": "Women",
     "price": 2625,
     "originalPrice": 3500,
-    "discount": 25,
     "images": [
       "src/assets/logo.png",
       "src/assets/logo.png",

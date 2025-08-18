@@ -13,9 +13,8 @@ import ProductDetail from './components/ProductDetail';
 import CartPanel from './components/CartPanel';
 import Checkout from './components/Checkout';
 import AboutUs from './components/AboutUs';
-import ShippingPolicy from './components/ShippingPolicy';
+import Policies from './components/Policies';
 import ContactUs from './components/ContactUs';
-import RefundPolicy from './components/RefundPolicy';
 import { CartProvider } from './contexts/CartContext';
 
 // Component to handle scroll to top on route changes
@@ -64,16 +63,12 @@ function App() {
                 element={<AboutUs />} 
               />
               <Route 
-                path="/shipping-policy" 
-                element={<ShippingPolicy />} 
+                path="/policies" 
+                element={<Policies />} 
               />
               <Route 
                 path="/contact" 
                 element={<ContactUs />} 
-              />
-              <Route 
-                path="/refund-policy" 
-                element={<RefundPolicy />} 
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
