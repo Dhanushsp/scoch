@@ -16,6 +16,9 @@ const ContactUs = () => {
     message: ''
   });
 
+  // Web3Forms configuration - use the same key as in Checkout.js
+  const web3FormsKey = '73a30202-1d84-48e1-80d9-7b0aaff99b06';
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -49,14 +52,15 @@ const ContactUs = () => {
     setSubmitStatus(null);
 
     try {
-      const orderData = {
-        access_key: 'YOUR-WEB3FORMS-ACCESS-KEY', // Replace with your actual access key
-        subject: `Contact Form Message from ${formData.name}`,
+      const contactData = {
+        access_key: web3FormsKey,
+        subject: 'Mail received from contact us page',
         name: formData.name,
         email: formData.email,
-        phone: formData.phone,
+        phone: formData.phone || 'Not provided',
         message: formData.message,
-        submissionDate: new Date().toLocaleString()
+        submission_date: new Date().toLocaleString(),
+        page_source: 'Contact Us Page'
       };
 
       // Submit to Web3Forms
@@ -65,7 +69,7 @@ const ContactUs = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify(contactData)
       });
 
       const result = await response.json();

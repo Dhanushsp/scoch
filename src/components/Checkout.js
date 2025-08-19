@@ -26,7 +26,7 @@ const Checkout = () => {
   const total = subtotal + shipping;
 
   // Web3Forms configuration
-  const web3FormsKey = 'b0d6c9a1-3592-495b-8684-61007f23d308'; // Replace with your actual key
+  const web3FormsKey = '73a30202-1d84-48e1-80d9-7b0aaff99b06'; // Replace with your actual key
 
   useEffect(() => {
     // Load Web3Forms script
