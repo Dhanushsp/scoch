@@ -55,15 +55,19 @@ const ProductDetail = () => {
     return product.originalPrice;
   };
 
-  // Get current discount based on selected size (for fragrances)
-  const getCurrentDiscount = () => {
-    const currentPrice = getCurrentPrice();
-    const currentOriginalPrice = getCurrentOriginalPrice();
-    if (currentOriginalPrice && currentPrice) {
-      return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
-    }
-    return product.discount;
-  };
+  // Get current discount based on selected size (for fragrances and others)
+const getCurrentDiscount = () => {
+  if (product.name === "Afsanay") {
+    return product.discount; // Always use "25%" from JSON for Afsanay
+  }
+  // For other products, use your existing logic
+  const currentPrice = getCurrentPrice();
+  const currentOriginalPrice = getCurrentOriginalPrice();
+  if (currentOriginalPrice && currentPrice) {
+    return Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100);
+  }
+  return product.discount;
+};
 
   // Get current image based on selected size (for fragrances)
   const getCurrentImage = () => {

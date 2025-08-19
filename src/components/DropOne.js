@@ -46,6 +46,9 @@ const DropOne = () => {
   };
 
   const getDisplayDiscount = (product) => {
+    if (product.name === "Afsanay") {
+      return product.discount; // Always use "25%" from JSON for Afsanay
+    }
     if (product.originalPrice && product.price) {
       return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
     }
