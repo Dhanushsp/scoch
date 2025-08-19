@@ -46,6 +46,12 @@ const DropOne = () => {
   };
 
   const getDisplayDiscount = (product) => {
+    // For Afsanay product, always show 25% discount
+    if (product.name === "Afsanay") {
+      return 25;
+    }
+    
+    // For other products, calculate dynamically or use fixed discount
     if (product.originalPrice && product.price) {
       return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
     }

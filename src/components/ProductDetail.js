@@ -57,6 +57,12 @@ const ProductDetail = () => {
 
   // Get current discount based on selected size (for fragrances)
   const getCurrentDiscount = () => {
+    // For Afsanay product, always show 25% discount
+    if (product.name === "Afsanay") {
+      return 25;
+    }
+    
+    // For other products, calculate dynamically or use fixed discount
     const currentPrice = getCurrentPrice();
     const currentOriginalPrice = getCurrentOriginalPrice();
     if (currentOriginalPrice && currentPrice) {
