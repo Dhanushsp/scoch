@@ -381,14 +381,17 @@ const ProductDetail = () => {
                 <span className="text-3xl font-bold text-black">
                   Rs. {typeof getCurrentPrice() === 'number' ? getCurrentPrice().toLocaleString() : 'N/A'}
                 </span>
-                {product.category !== 'Fragrances' && getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
+                {getCurrentOriginalPrice() && typeof getCurrentOriginalPrice() === 'number' && getCurrentOriginalPrice() > getCurrentPrice() && (
                   <>
                     <span className="text-xl text-gray-500 line-through">
                       Rs. {getCurrentOriginalPrice().toLocaleString()}
                     </span>
-                    <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                      {typeof getCurrentDiscount() === 'number' ? getCurrentDiscount() : 0}% OFF
-                    </span>
+                    {/* Discount Badge - Hidden for perfumes */}
+                    {product.category !== 'Fragrances' && (
+                      <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                        {typeof getCurrentDiscount() === 'number' ? getCurrentDiscount() : 0}% OFF
+                      </span>
+                    )}
                   </>
                 )}
               </div>
