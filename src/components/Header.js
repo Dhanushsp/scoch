@@ -195,7 +195,7 @@ const Header = () => {
                 <button
                   onClick={() => {
                     closeSidebar();
-                    navigate('/shipping-policy');
+                    navigate('/policies');
                   }}
                   className="w-full text-left p-4 text-lg font-medium text-black hover:bg-gray-50 rounded-xl transition-colors duration-200"
                 >

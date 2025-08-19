@@ -45,7 +45,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="flex flex-col items-start">
-            <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Contact Us</h4>
+            {/* <h4 className="text-lg md:text-xl font-serif font-semibold mb-4 md:mb-6">Contact Us</h4> */}
             <ul className="space-y-2 md:space-y-3">
               <li className="flex items-center text-soft-white/80 font-sans text-base md:text-lg">
                 <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
