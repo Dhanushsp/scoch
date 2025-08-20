@@ -360,7 +360,7 @@ const ContactUs = () => {
           )}
 
           {/* Web3Forms Test Button (for debugging) */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          {/* <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 text-blue-700">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -394,7 +394,7 @@ const ContactUs = () => {
             <p className="text-sm text-blue-600 mt-2">
               Use this button to test if Web3Forms is accessible from your current environment.
             </p>
-          </div>
+          </div> */}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field */}
