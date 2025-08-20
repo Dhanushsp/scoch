@@ -19,7 +19,7 @@ const ContactUs = () => {
   });
 
   // Web3Forms configuration - use the same key as in Checkout.js
-  const web3FormsKey = 'b0d6c9a1-3592-495b-8684-61007f23d308';
+  const web3FormsKey = '73a30202-1d84-48e1-80d9-7b0aaff99b06';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
