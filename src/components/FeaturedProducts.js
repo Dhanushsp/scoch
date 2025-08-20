@@ -54,6 +54,9 @@ const FeaturedProducts = () => {
   };
 
   const getDisplayDiscount = (product) => {
+    if (product.name === 'Afsanay') {
+      return 25;
+    }
     const currentPrice = getDisplayPrice(product);
     const currentOriginalPrice = getDisplayOriginalPrice(product);
     if (currentOriginalPrice && currentPrice) {

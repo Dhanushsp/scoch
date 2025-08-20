@@ -31,6 +31,9 @@ const NewArrivals = () => {
   };
 
   const getDisplayDiscount = (product) => {
+    if (product.name === 'Afsanay') {
+      return 25;
+    }
     if (product.category === 'Fragrances' && product.sizes && product.sizes.length > 0) {
       const size = product.sizes[0];
       if (size.originalPrice > size.price) {
