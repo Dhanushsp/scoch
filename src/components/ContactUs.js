@@ -7,6 +7,8 @@ const ContactUs = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [networkStatus, setNetworkStatus] = useState(navigator.onLine);
+  const [lastError, setLastError] = useState(null);
   const sectionRef = useRef(null);
 
   const [formData, setFormData] = useState({
@@ -35,7 +37,19 @@ const ContactUs = () => {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    // Network status listeners
+    const handleOnline = () => setNetworkStatus(true);
+    const handleOffline = () => setNetworkStatus(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      observer.disconnect();
+      // Cleanup event listeners
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
 
   const handleInputChange = (e) => {
@@ -46,12 +60,41 @@ const ContactUs = () => {
     }));
   };
 
+  const testNetworkConnectivity = async () => {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'HEAD',
+        mode: 'no-cors'
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const handleRetry = () => {
+    if (lastError) {
+      handleSubmit(new Event('submit'));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
+      // Check network connectivity first
+      if (!navigator.onLine) {
+        throw new Error('No internet connection. Please check your network and try again.');
+      }
+
+      // Test API connectivity
+      const isApiReachable = await testNetworkConnectivity();
+      if (!isApiReachable) {
+        throw new Error('Unable to reach the contact form service. Please check your internet connection and try again.');
+      }
+
       const contactData = {
         access_key: web3FormsKey,
         subject: 'Mail received from contact us page',
@@ -63,27 +106,64 @@ const ContactUs = () => {
         page_source: 'Contact Us Page'
       };
 
-      // Submit to Web3Forms
+      console.log('Submitting contact form with data:', contactData);
+
+      // Submit to Web3Forms with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(contactData)
+        body: JSON.stringify(contactData),
+        signal: controller.signal
       });
 
+      clearTimeout(timeoutId);
+
+      console.log('Web3Forms response status:', response.status);
+      console.log('Web3Forms response headers:', response.headers);
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+      }
+
       const result = await response.json();
+      console.log('Web3Forms response result:', result);
 
       if (result.success) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', message: '' });
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
-        throw new Error('Failed to submit message');
+        console.error('Web3Forms returned success: false', result);
+        throw new Error(`Submission failed: ${result.message || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Error submitting message:', error);
+      console.error('Error submitting contact form:', error);
+      
+      let errorMessage = 'There was an error submitting your message. Please try again or contact support.';
+      
+      if (error.name === 'AbortError') {
+        errorMessage = 'Request timed out. Please check your internet connection and try again.';
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('network error')) {
+        errorMessage = 'Network error. Please check your internet connection and try again.';
+      } else if (error.message.includes('No internet connection')) {
+        errorMessage = error.message;
+      } else if (error.message.includes('Server error')) {
+        errorMessage = 'Server is temporarily unavailable. Please try again in a few minutes.';
+      } else if (error.message.includes('Submission failed')) {
+        errorMessage = error.message;
+      } else if (error.message.includes('Unable to reach')) {
+        errorMessage = error.message;
+      }
+      
+      setLastError({ message: errorMessage, originalError: error });
       setSubmitStatus('error');
+      // Show error message to user
+      alert(errorMessage);
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
@@ -122,6 +202,52 @@ const ContactUs = () => {
         {/* Contact Form */}
         <div className={`max-w-2xl mx-auto transition-all duration-1000 ease-out delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
+          
+          {/* Network Status Indicator */}
+          {!networkStatus && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 text-red-700">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm font-medium">No Internet Connection</span>
+                </div>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-3 py-1 text-xs bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                >
+                  Refresh
+                </button>
+              </div>
+              <p className="text-sm text-red-600 mt-1">
+                Please check your network connection to submit the contact form.
+              </p>
+            </div>
+          )}
+
+          {/* Error Display and Retry */}
+          {lastError && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 text-red-700">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm font-medium">Form Submission Failed</span>
+                </div>
+                <button
+                  onClick={handleRetry}
+                  disabled={!networkStatus || isSubmitting}
+                  className={`px-4 py-2 text-sm rounded-lg transition-colors ${
+                    !networkStatus || isSubmitting
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-red-600 text-white hover:bg-red-700'
+                  }`}
+                >
+                  {isSubmitting ? 'Retrying...' : 'Retry'}
+                </button>
+              </div>
+              <p className="text-sm text-red-600 mt-2">{lastError.message}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field */}
             <div>
@@ -197,13 +323,19 @@ const ContactUs = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 px-6 font-medium rounded-xl transition-colors ${isSubmitting
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-black text-white hover:bg-gray-800'
+              disabled={isSubmitting || !networkStatus}
+              className={`w-full py-4 px-6 font-medium rounded-xl transition-colors ${
+                isSubmitting || !networkStatus
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-black text-white hover:bg-gray-800'
                 }`}
             >
-              {isSubmitting ? 'Sending Message...' : 'Send Message'}
+              {isSubmitting 
+                ? 'Sending Message...' 
+                : !networkStatus 
+                  ? 'No Internet Connection' 
+                  : 'Send Message'
+              }
             </button>
           </form>
 
