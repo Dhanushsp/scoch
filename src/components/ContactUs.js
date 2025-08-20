@@ -17,7 +17,7 @@ const ContactUs = () => {
   });
 
   // Web3Forms configuration - use the same key as in Checkout.js
-  const web3FormsKey = '73a30202-1d84-48e1-80d9-7b0aaff99b06';
+  const web3FormsKey = 'b0d6c9a1-3592-495b-8684-61007f23d308';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,23 +107,21 @@ const ContactUs = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Page Header */}
-        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
           <h1 className="text-4xl md:text-5xl font-serif font-medium text-black mb-6">
             Contact Us
           </h1>
           <div className="w-24 h-1 bg-black mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have a question or want to get in touch? We'd love to hear from you. 
+            Have a question or want to get in touch? We'd love to hear from you.
             Send us a message and we'll respond as soon as possible.
           </p>
         </div>
 
         {/* Contact Form */}
-        <div className={`max-w-2xl mx-auto transition-all duration-1000 ease-out delay-200 transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div className={`max-w-2xl mx-auto transition-all duration-1000 ease-out delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field */}
             <div>
@@ -200,11 +198,10 @@ const ContactUs = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full py-4 px-6 font-medium rounded-xl transition-colors ${
-                isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-black text-white hover:bg-gray-800'
-              }`}
+              className={`w-full py-4 px-6 font-medium rounded-xl transition-colors ${isSubmitting
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-black text-white hover:bg-gray-800'
+                }`}
             >
               {isSubmitting ? 'Sending Message...' : 'Send Message'}
             </button>
